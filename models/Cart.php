@@ -1,17 +1,19 @@
 <?php
 
+
 namespace app\models;
 
-class Products extends Model {
+
+class Cart extends Model
+{
     public $id;
     public $name;
-    public $description;
+    public $qty;
     public $price;
 
     public function getTableName()
     {
-        return "products";
+        return "cart";
     }
-
 
 }

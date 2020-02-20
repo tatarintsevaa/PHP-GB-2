@@ -1,8 +1,9 @@
 <?php
 include "../engine/Autoload.php";
 
-//use app\models\{Products, Users};
-//use app\engine\Autoload;
+use app\models\{Products, Users, Model};
+use app\engine\{Autoload, Db};
+use app\interfaces\IModel;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
@@ -10,9 +11,7 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 $product = new Products(new Db());
 $user = new Users(new Db());
 
-function foo(IModel $model) {
-    var_dump($model instanceof Model);
-}
+
 
 //echo $product->getOne(2);
 echo $user->getOne(1);
