@@ -7,9 +7,9 @@ use app\interfaces\IModel;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-//TODO подумать как избавиться от дублирования new Db()
-$product = new Products(new Db());
-$user = new Users(new Db());
+$db = new Db();
+$product = new Products($db);
+$user = new Users($db);
 
 
 
