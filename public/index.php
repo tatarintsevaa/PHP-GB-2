@@ -1,20 +1,30 @@
 <?php
-include "../engine/Autoload.php";
+include realpath("../config/config.php");
+include realpath("../engine/Autoload.php");
 
-use app\models\{Products, Users, Model};
+use app\models\{Products, Users, Basket};
 use app\engine\{Autoload, Db};
-use app\interfaces\IModel;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$db = new Db();
-$product = new Products($db);
-$user = new Users($db);
 
+$product = new Products("Кофе", "Крепкий", 12);
+var_dump($product->getOne(2));
 
+//$product->insert();
+//var_dump($product);
 
-//echo $product->getOne(2);
-echo $user->getOne(1);
+//$user = new Users('user1', 123);
+//$user->insert();
+//var_dump($user->getAll());
+
+//var_dump($product);
+
+//($product->getOne(1));
+
+//var_dump($product->getAll());
 
 //echo $product->getAll();
+//$product->delete();
 
+//var_dump($product->getAll());

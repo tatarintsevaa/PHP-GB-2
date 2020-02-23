@@ -6,10 +6,14 @@ class Autoload
 {
     public function loadClass($className)
     {
-        $path = str_replace(['app', '\\'], ['','/'] , $className);
-        $filename = "..{$path}.php";
-        if (file_exists($filename)) {
-            include $filename;
+        // $fileName = (str_replace(['app', '\\'], [ROOT_DIR, DS], $className) . ".php");
+        $fileName = realpath(str_replace(['app', '\\'], ['..', DS], $className) . ".php");
+
+        if (file_exists($fileName)) {
+            include $fileName;
+
         }
+
+
     }
 }
