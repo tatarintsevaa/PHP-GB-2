@@ -49,7 +49,9 @@ class Db
     }
     private function queryObj($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
-        $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
+        $pdoStatement->setFetchMode(\PDO::FETCH_OBJ);
+// А так ругаеться на драйвер. Почему?
+//        $pdoStatement->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
         $pdoStatement->execute($params);
         return $pdoStatement;
     }
@@ -61,7 +63,8 @@ class Db
 
 
     public function queryOne($sql, $params = []) {
-        return $this->queryObj($sql, $params)->fetchObject();
+        return $this->queryObj($sql, $params)->fetch();
+//        return $this->queryObj($sql, $params)->fetchObject(); А ведь можно на прямую...разве так не проще? В чем разница?
     }
 
     public function queryAll($sql, $params = []) {
