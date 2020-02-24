@@ -11,13 +11,12 @@ class Basket extends Model
 
     public function __construct($session_id, $goods_id)
     {
-        parent::__construct();
         $this->session_id = $session_id;
         $this->goods_id = $goods_id;
     }
 
 
-    public function getTableName()
+    public static function getTableName()
     {
         return "basket";
     }

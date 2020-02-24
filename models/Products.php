@@ -2,22 +2,42 @@
 
 namespace app\models;
 
-class Products extends Model {
-    public $id;
-    public $name;
-    public $description;
-    public $price;
+use app\engine\Db;
+
+class Products extends Model
+{
+    private $id;
+    private $name;
+    private $description;
+    private $price;
+
+    public $props = [
+        'name' => false,
+        'description' => false,
+        'price' => false,
+    ];
+//TODO придумать как перенести методы в родительский класс чтобы работало.
+    public function __set($name, $value)
+    {
+        $this->$name = $value; // $this->name = $value; Специально такой сетер оставили? ))
+        $this->props[$name] = true;
+    }
+
+    public function __get($name)
+    {
+         return $this->$name;
+    }
+
 
     public function __construct($name = null, $description = null, $price = null)
     {
-        parent::__construct();
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
     }
 
 
-    public function getTableName()
+    public static function getTableName()
     {
         return "products";
     }

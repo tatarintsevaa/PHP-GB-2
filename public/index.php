@@ -8,8 +8,17 @@ use app\engine\{Autoload, Db};
 spl_autoload_register([new Autoload(), 'loadClass']);
 
 
-$product = new Products("Кофе", "Крепкий", 12);
-var_dump($product->getOne(2));
+/**
+ * @var Products $product
+ */
+$product = Products::getOne(2);
+//var_dump($product);
+$product->__set('price', 120);
+$product->__set('name', 'Пирог');
+//var_dump($product);
+$product->update();
+//$product = new Products("Кофе", "Крепкий", 12);
+//var_dump($product->getOne(2));
 
 //$product->insert();
 //var_dump($product);
