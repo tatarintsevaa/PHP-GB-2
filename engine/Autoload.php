@@ -11,9 +11,6 @@ class Autoload
 
         if (file_exists($fileName)) {
             include $fileName;
-
         }
-
-
     }
 }

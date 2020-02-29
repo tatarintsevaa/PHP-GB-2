@@ -2,7 +2,7 @@
 namespace app\models;
 
 
-class Basket extends Model
+class Basket extends DbModel
 {
     public $id;
     public $session_id;

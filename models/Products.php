@@ -4,9 +4,8 @@ namespace app\models;
 
 use app\engine\Db;
 
-class Products extends Model
+class Products extends DbModel
 {
-    private $id;
     private $name;
     private $description;
     private $price;

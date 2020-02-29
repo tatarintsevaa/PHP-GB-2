@@ -8,18 +8,33 @@ use app\engine\{Autoload, Db};
 spl_autoload_register([new Autoload(), 'loadClass']);
 
 
-/**
- * @var Products $product
- */
-$product = Products::getOne(2);
+$controllerName = $_GET['c'] ?: 'product';
+$actionName = $_GET['a'];
+
+$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
+//var_dump($controllerClass);
+//var_dump($actionName);
+
+if (class_exists($controllerClass)) {
+    $controller = new $controllerClass();
+    $controller->runAction($actionName);
+} else die("404 - index");
+
+
+
+
+
+///**
+// * @var Products $product
+// */
+//$product = Products::getOne(2);
 //var_dump($product);
-$product->__set('price', 120);
-$product->__set('name', 'Пирог');
+//$product->price = 120;
 //var_dump($product);
-$product->update();
+//$product->save();
 //$product = new Products("Кофе", "Крепкий", 12);
 //var_dump($product->getOne(2));
-
+//var_dump($product::getAll());
 //$product->insert();
 //var_dump($product);
 
