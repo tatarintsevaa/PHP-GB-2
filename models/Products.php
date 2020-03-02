@@ -16,16 +16,7 @@ class Products extends DbModel
         'price' => false,
     ];
 //TODO придумать как перенести методы в родительский класс чтобы работало.
-    public function __set($name, $value)
-    {
-        $this->$name = $value; // $this->name = $value; Специально такой сетер оставили? ))
-        $this->props[$name] = true;
-    }
 
-    public function __get($name)
-    {
-         return $this->$name;
-    }
 
 
     public function __construct($name = null, $description = null, $price = null)

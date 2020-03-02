@@ -7,6 +7,22 @@ use app\interfaces\IModel;
 
 abstract class DbModel extends Model
 {
+
+    public function __set($name, $value)
+    {
+        if (property_exists($this, $name)) {
+            $this->$name = $value;
+            $this->props[$name] = true;
+        }
+    }
+
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
+    }
+
     public static function getOne($id)
     {
         $tableName = static::getTableName();
@@ -17,11 +33,12 @@ abstract class DbModel extends Model
     public static function getAll()
     {
         $tableName = static::getTableName();
-            $sql = "SELECT * FROM {$tableName}";
-            return DB::getInstance()->queryAll($sql);
+        $sql = "SELECT * FROM {$tableName}";
+        return DB::getInstance()->queryAll($sql);
     }
 
-    public function save() {
+    public function save()
+    {
         if (is_null($this->id)) {
             $this->insert();
         } else {
@@ -35,17 +52,13 @@ abstract class DbModel extends Model
         $columns = '';
         $values = '';
         foreach ($this->props as $key => $value) {
-            if ($key != 'id') {
-                $params["$key"] = $this->$key;
-                $columns .= "{$key}, ";
-                $values .= ":{$key}, ";
-            }
+            $params["$key"] = $this->$key;
+            $columns .= "{$key}, ";
+            $values .= ":{$key}, ";
         }
         $columns = mb_substr($columns, 0, -2);
         $values = mb_substr($values, 0, -2);
-
         $sql = "INSERT INTO {$this->getTableName()} ($columns) VALUES ($values)";
-
         DB::getInstance()->execute($sql, $params);
         $this->id = DB::getInstance()->getLustInsertId();
     }
@@ -62,23 +75,21 @@ abstract class DbModel extends Model
         $params = [];
         $str = '';
         $id = $this->id;
-//        var_dump($this->props);
         foreach ($this->props as $key => $value) {
-            if ($key != 'id') {
-                $params["$key"] = $this->$key;
-                $str .= "{$key} = :{$key}, ";
-            }
+            if ($this->props[$key]) continue;
+            $params["$key"] = $this->$key;
+            $str .= "{$key} = :{$key}, ";
         }
         $str = mb_substr($str, 0, -2);
-
         $sql = "UPDATE {$this->getTableName()} SET ";
         $sql .= $str;
-        $params += ['id' => $this->id];
+        $params['id'] = $this->id;
         $sql .= " WHERE id = :id";
         return Db::getInstance()->execute($sql, $params);
     }
 
-    public static function getAllFeedback($id) {
+    public static function getAllFeedback($id)
+    {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id_good = :id ORDER BY id DESC";
         return DB::getInstance()->queryAll($sql, ['id' => $id]);
