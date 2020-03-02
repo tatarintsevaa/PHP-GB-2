@@ -3,10 +3,23 @@
 namespace app\models;
 
 use app\engine\Db;
-use app\interfaces\IModel;
 
 abstract class DbModel extends Model
 {
+
+    public function __set($name, $value)
+    {
+        if ($this->$name != $value) {
+            $this->$name = $value;
+            $this->props[$name] = true;
+        }
+    }
+
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+
     public static function getOne($id)
     {
         $tableName = static::getTableName();

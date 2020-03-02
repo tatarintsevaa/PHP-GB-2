@@ -1,15 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/api')
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.qty > 0) {
-                creatCartQty(data.qty)
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     fetch('/api')
+//         .then((response) => response.json())
+//         .then((data) => {
+//             if (data.qty > 0) {
+//                 creatCartQty(data.qty)
+//             }
+//         })
+//         .catch((error) => {
+//             console.log(error);
+//         });
+// });
 
 function creatCartQty(qty) {
     const qtyEl = document.createElement('span');

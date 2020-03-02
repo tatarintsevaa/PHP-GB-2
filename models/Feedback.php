@@ -16,19 +16,7 @@ class Feedback extends DbModel
         'id_good' => false,
     ];
 
-    public function __set($name, $value)
-    {
-            if ($this->$name != $value) {
-                $this->$name = $value;
-                $this->props[$name] = true;
-            }
-    }
 
-    public function __get($name)
-    {
-            return $this->$name;
-
-    }
 
     public function __construct($name = null, $feedback = null, $id_good = null)
     {
@@ -42,7 +30,6 @@ class Feedback extends DbModel
     {
         return "feedback";
     }
-
 
 
 }
