@@ -8,20 +8,7 @@ use app\interfaces\IModel;
 abstract class DbModel extends Model
 {
 
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            $this->$name = $value;
-            $this->props[$name] = true;
-        }
-    }
 
-    public function __get($name)
-    {
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        }
-    }
 
     public static function getOne($id)
     {
@@ -76,7 +63,7 @@ abstract class DbModel extends Model
         $str = '';
         $id = $this->id;
         foreach ($this->props as $key => $value) {
-            if ($this->props[$key]) continue;
+            if (!$this->props[$key]) continue;
             $params["$key"] = $this->$key;
             $str .= "{$key} = :{$key}, ";
         }
