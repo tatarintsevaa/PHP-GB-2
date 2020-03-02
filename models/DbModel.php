@@ -7,9 +7,6 @@ use app\interfaces\IModel;
 
 abstract class DbModel extends Model
 {
-
-
-
     public static function getOne($id)
     {
         $tableName = static::getTableName();
@@ -58,10 +55,8 @@ abstract class DbModel extends Model
 
     private function update()
     {
-        /*TODO избавиться от дублирования*/
         $params = [];
         $str = '';
-        $id = $this->id;
         foreach ($this->props as $key => $value) {
             if (!$this->props[$key]) continue;
             $params["$key"] = $this->$key;

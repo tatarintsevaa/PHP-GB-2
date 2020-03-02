@@ -18,8 +18,10 @@ class Feedback extends DbModel
 
     public function __set($name, $value)
     {
-            $this->$name = $value;
-            $this->props[$name] = true;
+            if ($this->$name != $value) {
+                $this->$name = $value;
+                $this->props[$name] = true;
+            }
     }
 
     public function __get($name)
