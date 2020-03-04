@@ -72,6 +72,13 @@ class Db
         return $this->getConnection()->lastInsertId();
     }
 
+    public function executeLimit($sql, $page) {
+        $pdoStatement = $this->getConnection()->prepare($sql);
+        $pdoStatement->bindValue(1, $page, \PDO::PARAM_INT);
+        $pdoStatement->execute();
+        return $pdoStatement->fetchAll();
+    }
+
     public function __toString()
     {
         return "Db";

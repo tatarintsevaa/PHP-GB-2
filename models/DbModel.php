@@ -7,19 +7,6 @@ use app\engine\Db;
 abstract class DbModel extends Model
 {
 
-    public function __set($name, $value)
-    {
-        if ($this->$name != $value) {
-            $this->$name = $value;
-            $this->props[$name] = true;
-        }
-    }
-
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-
     public static function getOne($id)
     {
         $tableName = static::getTableName();
@@ -88,6 +75,12 @@ abstract class DbModel extends Model
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id_good = :id ORDER BY id DESC";
         return DB::getInstance()->queryAll($sql, ['id' => $id]);
+    }
+
+    public static function showLimit($page) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE 1 LIMIT ?, 2";
+        return Db::getInstance()->executeLimit($sql, $page);
     }
 
 

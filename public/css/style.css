@@ -209,4 +209,13 @@ main {
       justify-content: space-around;
       align-items: center; }
 
+.pagination a {
+  padding: 5px;
+  text-decoration: none;
+  color: #3C3F41;
+  border-radius: 30%; }
+  .pagination a:hover {
+    background-color: #3C3F41;
+    color: #eeeeee; }
+
 /*# sourceMappingURL=style.css.map */

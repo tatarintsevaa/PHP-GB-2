@@ -2,7 +2,7 @@
 <div class="products">
     <?php foreach ($catalog as $item): ?>
         <div class="product-item">
-            <a href="?c=product&a=card&id=<?=$item['id']?>" target="_blank" title="Подробнее о товаре">
+            <a href="/product/card/?id=<?=$item['id']?>" target="_blank" title="Подробнее о товаре">
                 <img src="http://via.placeholder.com/150x120" alt="<?=$item['name']?>">
             </a>
             <div class="product-item__text">
@@ -12,4 +12,13 @@
             </div>
         </div>
     <?php endforeach;?>
+
 </div>
+<div class="pagination" class="pagination">
+    <a href="/product/catalog/?page=<?=$page?>&action=prev"><</a>
+    <a href="/product/catalog/?page=0">1</a>
+    <a href="/product/catalog/?page=2">2</a>
+    <a href="/product/catalog/?page=4">3</a>
+    <a href="/product/catalog/?page=<?=$page?>&action=next">></a>
+</div>
+

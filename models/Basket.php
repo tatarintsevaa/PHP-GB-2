@@ -4,9 +4,8 @@ namespace app\models;
 
 class Basket extends DbModel
 {
-    private $id;
-    private $session_id;
-    private $goods_id;
+    protected $session_id;
+    protected $goods_id;
 
 
     public function __construct($session_id = null, $goods_id = null)

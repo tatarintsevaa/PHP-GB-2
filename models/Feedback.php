@@ -6,9 +6,9 @@ namespace app\models;
 
 class Feedback extends DbModel
 {
-    private $name;
-    private $feedback;
-    private $id_good;
+    protected $name;
+    protected $feedback;
+    protected $id_good;
 
     public $props = [
         'name' => false,

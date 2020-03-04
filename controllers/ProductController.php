@@ -14,8 +14,17 @@ class ProductController extends Controller
 
     public function actionCatalog()
     {
-        $catalog = Products::getAll();
-        echo $this->render('catalog', ['catalog' => $catalog]);
+        var_dump($_GET);
+        $page = (int)$_GET['page'];
+        $action = $_GET['action'];
+        if ($action == 'next' && $page <= 2) {
+            $page = $page + 2;
+        } elseif ($action == 'prev' && $page >= 2) {
+            $page = $page - 2;;
+        }
+
+        $catalog = Products::showLimit($page);
+        echo $this->render('catalog', ['catalog' => $catalog, 'page' => $page]);
     }
 
     public function actionApiCatalog()

@@ -46,7 +46,7 @@ function editEvent(elem) {
     elem.addEventListener('click', (evt) => {
         evt.preventDefault();
         const idFeed = evt.target.dataset.id_feed;
-        fetch(`/?c=api&a=edit&id_feed=${idFeed}`)
+        fetch(`/api/edit/?id_feed=${idFeed}`)
             .then((response) => response.json())
             .then((data) => {
                 name.value = data.name;
@@ -67,7 +67,7 @@ function editEvent(elem) {
 
 function save(editBtn, elem, idFeed) {
     editBtn.addEventListener('click', (evt) => {
-        fetch(`/?c=api&a=save&id_feed=${idFeed}`, {
+        fetch(`/api/save/?id_feed=${idFeed}`, {
             method: 'POST',
             body: JSON.stringify({
                 name: name.value,
@@ -99,7 +99,7 @@ function addEvent(elem) {
     elem.addEventListener('click', (evt) => {
         /*TODO сделать проверку на пустую форму*/
         let id = evt.target.dataset.id_good;
-        fetch('/?c=api&a=add', {
+        fetch('/api/add', {
             method: 'POST',
             body: JSON.stringify({
                 name: name.value,
@@ -135,7 +135,7 @@ function delEvent(elem) {
     elem.addEventListener('click', (evt) => {
         evt.preventDefault();
         const id_feed = elem.dataset.id_feed;
-        fetch(`/?c=api&a=delete&id_feed=${id_feed}`)
+        fetch(`/api/delete/?id_feed=${id_feed}`)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status) {

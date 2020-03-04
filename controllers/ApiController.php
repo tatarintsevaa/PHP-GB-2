@@ -38,7 +38,6 @@ class ApiController extends Controller
         $id_feed = (int) $_GET['id_feed'];
         $data = $this->getDataPost();
         $feedback = Feedback::getOne($id_feed);
-
         $feedback->name = $data['name'];
         $feedback->feedback = $data['feed'];
         $result = $feedback->save();
