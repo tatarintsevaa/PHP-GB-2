@@ -79,6 +79,8 @@ class Db
         return $pdoStatement->fetchAll();
     }
 
+
+
     public function __toString()
     {
         return "Db";

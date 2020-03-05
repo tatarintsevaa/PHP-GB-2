@@ -3,6 +3,9 @@
 
 namespace app\controllers;
 
+use app\engine\Render;
+
+
 
 abstract class Controller
 {
@@ -10,6 +13,14 @@ abstract class Controller
     private $defaultAction = 'index';
     private $layout = 'main';
     private $useLayout = true;
+    private $renderer;
+
+
+    public function __construct()
+    {
+        $this->renderer = new Render;
+    }
+
 
     public function runAction($action = null)
     {
@@ -26,7 +37,7 @@ abstract class Controller
         if ($this->useLayout) {
             return $this->renderTemplate("layouts/{$this->layout}", [
                 'header' => $this->renderTemplate('header', [
-                    'cart' => $this->renderTemplate('cart', $params)
+                    'cart' => $this->renderTemplate('cartBtn', $params)
                 ]),
                 'menu' => $this->renderTemplate('menu'),
                 'content' => $this->renderTemplate($templates, $params)
@@ -38,12 +49,6 @@ abstract class Controller
 
     public function renderTemplate($templates, $params = [])
     {
-        ob_start();
-        extract($params);
-        $templatesPath = TEMPLATES_DIR . $templates . ".php";
-        if (file_exists($templatesPath)) {
-            include $templatesPath;
-        }
-        return ob_get_clean();
+        return $this->renderer->renderTemplate($templates, $params);
     }
 }

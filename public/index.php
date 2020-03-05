@@ -1,8 +1,9 @@
 <?php
+session_start();
 include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
-use app\models\{Products, Users, Basket};
+use app\models\{Products, Users, Cart};
 use app\engine\{Autoload, Db};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
@@ -13,10 +14,12 @@ $url = explode('/',$_SERVER['REQUEST_URI']);
 $controllerName = $url[1] ?: 'product';
 $actionName = $url[2];
 
+//var_dump($controllerName, $actionName);
+
 
 $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
-//var_dump($controllerClass);
-//var_dump($actionName);
+//var_dump("Controller" . "-" . $controllerClass);
+//var_dump("Action" . "-" .$actionName);
 
 if (class_exists($controllerClass)) {
     $controller = new $controllerClass();

@@ -5,6 +5,7 @@ namespace app\controllers;
 
 
 use app\models\Feedback;
+use app\models\Cart;
 
 class ApiController extends Controller
 {
@@ -52,5 +53,10 @@ class ApiController extends Controller
         $feedback = Feedback::getOne($id_feed);
         $result = $feedback->delete();
         echo json_encode(['status' => $result]);
+    }
+
+    public function actionCartQty() {
+        $qty = Cart::getQty(session_id());
+        echo json_encode(['qty' => $qty]);
     }
 }

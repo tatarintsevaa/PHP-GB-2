@@ -14,8 +14,11 @@ class ProductController extends Controller
 
     public function actionCatalog()
     {
-        var_dump($_GET);
         $page = (int)$_GET['page'];
+        if (is_null($_GET['page'])) {
+            $page = 0;
+        };
+
         $action = $_GET['action'];
         if ($action == 'next' && $page <= 2) {
             $page = $page + 2;
@@ -42,7 +45,5 @@ class ProductController extends Controller
         $feedback = Feedback::getAllFeedback($id);
         echo $this->render('card', ['product' => $product, 'feedback' => $feedback]);
     }
-
-
 
 }

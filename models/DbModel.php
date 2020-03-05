@@ -83,6 +83,13 @@ abstract class DbModel extends Model
         return Db::getInstance()->executeLimit($sql, $page);
     }
 
+    public static function getCartProducts($session_id)
+    {
+        $sql = "SELECT products.id as id_good, products.name as name, products.image as image, products.price as price,
+ cart.qty as qty, cart.session_id as session_id, cart.id as id FROM products, cart WHERE cart.id_good = products.id AND cart.session_id = :session_id";
+        return Db::getInstance()->queryAll($sql, ['session_id' => $session_id]);
+    }
+
 
     abstract public static function getTableName();
 }

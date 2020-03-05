@@ -19,9 +19,6 @@ header
   font-size: 2em
   color: $light
 
-.cart-block
-  position: relative
-
 .cart-drop
   position: absolute
   margin-top: 10px
@@ -71,24 +68,39 @@ header
 
 
 .btn-cart
+  display: block
+  text-decoration: none
+  color: $dark
   text-transform: uppercase
   font-size: 20px
   height: 40px
   padding-right: 10px
   padding-left: 10px
-  margin-right: 100px
   border-radius: 10px 10px 10px 10px
   border: 1px solid #fff
   background-color: #fff
-  //box-shadow: 0 0 10px rgba(0,0,0,0.5)
-  outline: none
-  line-height: 20px
+  line-height: 40px
   transition: all 0.2s
-
   &:hover
     cursor: pointer
     background-color: $dark
     color: #ffffff
+
+.cart
+  position: relative
+  &_qty
+    width: 20px
+    height: 20px
+    font-size: 15px
+    border-radius: 50%
+    background-color: #ffffff
+    color: $dark
+    text-align: center
+    line-height: 20px
+    position: absolute
+    top: 32px
+    right: -12px
+
 
 
 .products
@@ -149,8 +161,6 @@ main
   color: #fff
 
 
-
-
   &:hover
     cursor: pointer
     background-color: $light
@@ -165,6 +175,7 @@ main
   list-style-type: none
   border-bottom: 1px solid $dark
   padding: 20px 0
+
   & li
     margin-right: 20px
     font-size: 1em
@@ -173,6 +184,7 @@ main
   & a
     text-decoration: none
     color: $dark
+
     &:hover
       border-bottom: 2px solid $dark
 
@@ -215,20 +227,25 @@ main
   display: flex
   flex-direction: column
   align-items: center
+
   input
     width: 200px
     margin-bottom: 5px
+
   button
     width: 200px
 
 .card
   text-align: center
   padding: 20px 0
+
   &_box
     display: flex
     padding: 20px 0
+
     & img
       margin-right: 20px
+
     &__text
       display: flex
       flex-direction: column
@@ -242,6 +259,8 @@ main
     text-decoration: none
     color: $dark
     border-radius: 30%
+    transition: all 0.2s ease
+
     &:hover
       background-color: $dark
       color: $light

@@ -1,28 +1,28 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     fetch('/api')
-//         .then((response) => response.json())
-//         .then((data) => {
-//             if (data.qty > 0) {
-//                 creatCartQty(data.qty)
-//             }
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//         });
-// });
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/cartQty')
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.qty > 0) {
+                creatCartQty(data.qty)
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+});
 
 function creatCartQty(qty) {
-    const qtyEl = document.createElement('span');
-    qtyEl.innerHTML = `[${qty}]`;
-    qtyEl.className = 'cartQty';
-    document.querySelector('.menu').lastChild.appendChild(qtyEl);
+    const qtyEl = document.createElement('div');
+    qtyEl.innerHTML = `${qty}`;
+    qtyEl.className = 'cart_qty';
+    document.querySelector('.cart').appendChild(qtyEl);
 }
 
 function updateCartQty(qty) {
     if (qty === 0) {
-        document.querySelector('.cartQty').remove();
+        document.querySelector('.cart_qty').remove();
     } else {
-        document.querySelector('.cartQty').innerHTML = `[${qty}]`;
+        document.querySelector('.cart_qty').innerHTML = `[${qty}]`;
 
     }
 }
