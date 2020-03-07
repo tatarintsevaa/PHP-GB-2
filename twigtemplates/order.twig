@@ -1,0 +1,17 @@
+<h1>Корзина</h1>
+<div class="order">
+    <table class="order_cart">
+        <? foreach ($cart as $item):?>
+        {% for item in cart %}
+            <tr>
+                <td><img src="http://via.placeholder.com/80x50" alt=""></td>
+                <td><?=$item['name']?>{{ item.name }}</td>
+                <td><?=$item['qty']?>{{ item.qty }}</td>
+                <td> {% item.qty * item.price %} руб.</td>
+                <td><button class="btn-rem">x</button></td>
+            </tr>
+        {% endfor %}
+        <?endforeach;?>
+    </table>
+    <div class="order_details"></div>
+</div>

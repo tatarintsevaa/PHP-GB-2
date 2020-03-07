@@ -4,7 +4,7 @@
 namespace app\controllers;
 
 use app\engine\Render;
-
+use app\interfaces\IRenderer;
 
 
 abstract class Controller
@@ -16,9 +16,9 @@ abstract class Controller
     private $renderer;
 
 
-    public function __construct()
+    public function __construct(IRenderer $renderer)
     {
-        $this->renderer = new Render;
+        $this->renderer = $renderer;
     }
 
 
@@ -31,6 +31,7 @@ abstract class Controller
             $this->$method();
         } else die("404 - controller");
     }
+
 
     public function render($templates, $params = [])
     {

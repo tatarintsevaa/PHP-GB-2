@@ -4,12 +4,15 @@ include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
 use app\models\{Products, Users, Cart};
-use app\engine\{Autoload, Db};
+use app\engine\{Autoload, Render, TwigRender};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
+
+include realpath("../vendor/Autoload.php");
+
+
+
 $url = explode('/',$_SERVER['REQUEST_URI']);
-
-
 
 $controllerName = $url[1] ?: 'product';
 $actionName = $url[2];
@@ -22,7 +25,7 @@ $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller
 //var_dump("Action" . "-" .$actionName);
 
 if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
+    $controller = new $controllerClass(new Render());
     $controller->runAction($actionName);
 } else die("404 - index");
 
