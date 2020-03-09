@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 02 2020 г., 20:56
+-- Время создания: Мар 09 2020 г., 17:35
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -25,22 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `basket`
+-- Структура таблицы `cart`
 --
 
-CREATE TABLE `basket` (
+CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
+  `id_good` int(11) NOT NULL,
   `session_id` text NOT NULL,
-  `product_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Дамп данных таблицы `basket`
+-- Дамп данных таблицы `cart`
 --
 
-INSERT INTO `basket` (`id`, `session_id`, `product_id`) VALUES
-(79, 'lk8cp65p4bm31dahlvqndusbvkfa1jnk', 1),
-(86, 'tegtthul8uap15pbtt4aakhu15hjfku7', 1);
+INSERT INTO `cart` (`id`, `id_good`, `session_id`, `qty`) VALUES
+(1, 1, 'p2ji4m0j3b66sepi4qd99ju7bv23s2gs', 2),
+(7, 5, 'p2ji4m0j3b66sepi4qd99ju7bv23s2gs', 1),
+(8, 2, 'p2ji4m0j3b66sepi4qd99ju7bv23s2gs', 5),
+(10, 3, 'va55n5eo6ivpra79iatos0buofttug3t', 2),
+(12, 2, 'va55n5eo6ivpra79iatos0buofttug3t', 3),
+(13, 4, 'va55n5eo6ivpra79iatos0buofttug3t', 1),
+(14, 10, 'va55n5eo6ivpra79iatos0buofttug3t', 1);
 
 -- --------------------------------------------------------
 
@@ -60,8 +66,8 @@ CREATE TABLE `feedback` (
 --
 
 INSERT INTO `feedback` (`id`, `name`, `feedback`, `id_good`) VALUES
-(3, 'Иван', 'Супер', 2),
-(15, 'Иван', 'Топчик!', 4);
+(15, 'Иван', 'Топчик!', 4),
+(32, 'Алексей ', 'asd', 4);
 
 -- --------------------------------------------------------
 
@@ -73,19 +79,21 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `description` text NOT NULL,
-  `price` int(11) NOT NULL
+  `price` int(11) NOT NULL,
+  `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
-(1, 'Пицца', 'Новое описание 2', 55),
-(2, 'Пончик', 'Сладкий, с шоколадом.', 12),
-(3, 'Шоколад', 'Белый', 12),
-(4, 'Сникерс', 'Заморский', 25),
-(5, 'Кофе', 'Крепкий', 12);
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
+(1, 'Пицца', 'Новое описание 2', 55, ''),
+(2, 'Пончик', 'Сладкий, с шоколадом.', 12, ''),
+(3, 'Шоколад', 'Белый', 12, ''),
+(4, 'Сникерс', 'Заморский', 25, ''),
+(5, 'Кофе', 'Крепкий', 12, ''),
+(10, 'Пирожок', 'С мясом', 20, '');
 
 -- --------------------------------------------------------
 
@@ -114,9 +122,9 @@ INSERT INTO `users` (`id`, `login`, `pass`) VALUES
 --
 
 --
--- Индексы таблицы `basket`
+-- Индексы таблицы `cart`
 --
-ALTER TABLE `basket`
+ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -142,22 +150,22 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `basket`
+-- AUTO_INCREMENT для таблицы `cart`
 --
-ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
