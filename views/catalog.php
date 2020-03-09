@@ -8,7 +8,7 @@
             <div class="product-item__text">
                 <h3><?=$item['name']?></h3>
                 <p>Цена: <strong><?=$item['price']?></strong> руб.</p>
-                <button class="by-btn">Купить</button>
+                <button class="by-btn" data-id="<?=$item['id']?>">Купить</button>
             </div>
         </div>
     <?php endforeach;?>
@@ -21,4 +21,32 @@
     <a href="/product/catalog/?page=4">3</a>
     <a href="/product/catalog/?page=<?=$page?>&action=next">></a>
 </div>
+<script>
+
+    addEventListener('DOMContentLoaded', () => {
+        const byBtn = document.querySelectorAll('.by-btn');
+        byBtn.forEach((elem) => {
+            elem.addEventListener('click', (evt) => {
+                evt.preventDefault();
+                let id = evt.target.dataset.id;
+                fetch(`/cart/buy/?id=${id}`)
+                    .then((response) => response.json())
+
+                    .then((data) => {
+                        if (data.qty === 1) {
+                            creatCartQty(data.qty);
+
+                        } else {
+                            updateCartQty(data.qty);
+
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            })
+        })
+    })
+
+</script>
 

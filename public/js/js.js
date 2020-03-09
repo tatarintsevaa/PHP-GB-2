@@ -22,8 +22,7 @@ function updateCartQty(qty) {
     if (qty === 0) {
         document.querySelector('.cart_qty').remove();
     } else {
-        document.querySelector('.cart_qty').innerHTML = `[${qty}]`;
-
+        document.querySelector('.cart_qty').innerHTML = `${qty}`;
     }
 }
 

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\engine\Db;
+use mysql_xdevapi\Session;
 
 abstract class DbModel extends Model
 {
@@ -30,6 +31,8 @@ abstract class DbModel extends Model
         }
     }
 
+
+
     private function insert()
     {
         $params = [];
@@ -40,9 +43,12 @@ abstract class DbModel extends Model
             $columns .= "{$key}, ";
             $values .= ":{$key}, ";
         }
+
         $columns = mb_substr($columns, 0, -2);
         $values = mb_substr($values, 0, -2);
         $sql = "INSERT INTO {$this->getTableName()} ($columns) VALUES ($values)";
+//        var_dump($sql);
+//        var_dump($params);
         DB::getInstance()->execute($sql, $params);
         $this->id = DB::getInstance()->getLustInsertId();
     }

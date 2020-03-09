@@ -6,19 +6,24 @@ use app\engine\Db;
 
 class Cart extends DbModel
 {
+    protected $id_good;
     protected $session_id;
-    protected $goods_id;
+    protected $qty;
 
     public $props = [
+        'id_good' => false,
         'session_id' => false,
-        'goods_id' => false,
+        'qty' => false
     ];
 
 
-    public function __construct($session_id = null, $goods_id = null)
+    public function __construct($id_good = null, $session_id = null, $qty = 1, $id = null)
     {
+        $this->id_good = $id_good;
         $this->session_id = $session_id;
-        $this->goods_id = $goods_id;
+        $this->qty = $qty;
+        $this->id = $id;
+
     }
 
     public static function getQty($session_id)
@@ -28,10 +33,17 @@ class Cart extends DbModel
         return array_sum(array_column($result, 'qty'));
     }
 
+    public static function getOneCartItem($id, $session_id)
+    {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE id_good = :id AND session_id = :session_id";
+        return DB::getInstance()->queryObj($sql, ['id' => $id, 'session_id' => $session_id], static::class);
+    }
+
 
     public static function getTableName()
     {
-        return "basket";
+        return "cart";
     }
 
 }

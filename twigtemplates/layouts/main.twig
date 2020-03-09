@@ -7,10 +7,10 @@
     <script src="/js/js.js" defer></script>
 </head>
 <body>
-{{ header }}
-{{ menu }}
+{{ header | raw }}
+{{ menu | raw }}
 <main>
-    {{ content }}
+    {{ content | raw }}
 </main>
 </body>
 </html>
