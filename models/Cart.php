@@ -33,11 +33,11 @@ class Cart extends DbModel
         return array_sum(array_column($result, 'qty'));
     }
 
-    public static function getOneCartItem($id, $session_id)
+    public static function getOneCartItem($id_good, $session_id)
     {
         $tableName = static::getTableName();
-        $sql = "SELECT * FROM {$tableName} WHERE id_good = :id AND session_id = :session_id";
-        return DB::getInstance()->queryObj($sql, ['id' => $id, 'session_id' => $session_id], static::class);
+        $sql = "SELECT * FROM {$tableName} WHERE id_good = :id_good AND session_id = :session_id";
+        return DB::getInstance()->queryObj($sql, ['id_good' => $id_good, 'session_id' => $session_id], static::class);
     }
 
 

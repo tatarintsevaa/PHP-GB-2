@@ -1,18 +1,29 @@
 <h1>Корзина</h1>
 <div class="order">
-    <table class="order_cart">
-        <? foreach ($cart as $item): ?>
+    <? if (empty($cart)) : ?>
+        <h1>Ваша корзина пуста</h1>
+    <? else: ?>
+        <table class="order_cart">
             <tr>
-                <td><img src="http://via.placeholder.com/80x50" alt=""></td>
-                <td><?= $item['name'] ?></td>
-                <td><?= $item['qty'] ?></td>
-                <td><?= $item['price'] ?> руб.</td>
-                <td>
-                    <button class="btn-rem" data-id="<?= $item['id'] ?>">x</button>
-                </td>
+                <td></td>
+                <td>Наименование</td>
+                <td>Кол-во</td>
+                <td>Цена</td>
+                <td>Удалить</td>
             </tr>
-        <? endforeach; ?>
-    </table>
+            <? foreach ($cart as $item): ?>
+                <tr>
+                    <td><img src="http://via.placeholder.com/80x50" alt=""></td>
+                    <td><?= $item['name'] ?></td>
+                    <td><?= $item['qty'] ?></td>
+                    <td><?= $item['price'] ?> руб.</td>
+                    <td>
+                        <button class="btn-rem" data-id="<?= $item['id'] ?>">x</button>
+                    </td>
+                </tr>
+            <? endforeach; ?>
+        </table>
+    <? endif; ?>
     <div class="order_details"></div>
 </div>
 <script>
@@ -28,14 +39,13 @@
                         updateCartQty(data.qty);
                         const newQty = data.newQty;
                         if (newQty >= 1) {
-                            elem.previousElementSibling.textContent = newQty;
-                            const totalPrice = document.getElementById('total');
-                            totalPrice.innerText = data.totalPrice;
+                            elem.parentElement.previousElementSibling.previousElementSibling.textContent = newQty;
+                            // const totalPrice = document.getElementById('total');
+                            // totalPrice.innerText = data.totalPrice;
                         } else {
-                            elem.parentElement.nextElementSibling.remove();
-                            elem.parentElement.remove();
-                            const totalPrice = document.getElementById('total');
-                            totalPrice.innerText = data.totalPrice;
+                            elem.parentElement.parentElement.remove();
+                            // const totalPrice = document.getElementById('total');
+                            // totalPrice.innerText = data.totalPrice;
                         }
 
                     })

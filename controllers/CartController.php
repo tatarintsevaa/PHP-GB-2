@@ -14,7 +14,8 @@ class CartController extends Controller
         echo $this->render('cart', ['cart' => $cart]);
     }
 
-    public function actionBuy() {
+    public function actionBuy()
+    {
         $id = $_GET['id'];
         $cartItem = Cart::getOneCartItem($id, session_id());
         if ($cartItem) {
@@ -28,10 +29,20 @@ class CartController extends Controller
         echo json_encode(['qty' => $qty]);
     }
 
-    public function actionDel() {
+    public function actionDel()
+    {
         $id = $_GET['id'];
-        $cartItem = Cart::getOneCartItem(null,null, null);
-        var_dump($cartItem);
+        $cartItem = Cart::getOne($id);
+        if ($cartItem->qty > 1) {
+            $cartItem->qty--;
+            $cartItem->save();
+            $newQty = $cartItem->qty;
+        } else {
+            $cartItem->delete();
+            $newQty = 0;
+        }
+        $qty = Cart::getQty(session_id());
+        echo json_encode(['qty' => $qty, 'newQty' => $newQty]);
     }
 
 
