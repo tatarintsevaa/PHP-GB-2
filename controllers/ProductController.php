@@ -20,14 +20,16 @@ class ProductController extends Controller
         };
 
         $action = $_GET['action'];
-        if ($action == 'next' && $page <= 2) {
-            $page = $page + 2;
-        } elseif ($action == 'prev' && $page >= 2) {
-            $page = $page - 2;;
+        if ($action == 'next' && $page <= PAGINATION_ITEM_COUNT) {
+            $page = $page + PAGINATION_ITEM_COUNT;
+        } elseif ($action == 'prev' && $page >= PAGINATION_ITEM_COUNT) {
+            $page = $page - PAGINATION_ITEM_COUNT;
         }
+        $pageCount = Products::getPagesCount();
 
-        $catalog = Products::showLimit($page);
-        echo $this->render('catalog', ['catalog' => $catalog, 'page' => $page]);
+        $catalog = Products::showLimit($page, PAGINATION_ITEM_COUNT);
+        $step = 0;
+        echo $this->render('catalog', ['catalog' => $catalog, 'page' => $page, 'pageCount' => $pageCount, 'step' => $step]);
     }
 
     public function actionApiCatalog()

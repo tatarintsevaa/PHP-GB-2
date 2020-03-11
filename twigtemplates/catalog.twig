@@ -15,9 +15,13 @@
 </div>
 <div class="pagination">
     <a href="/product/catalog/?page={{ page }}&action=prev"><</a>
-    <a href="/product/catalog/?page=0">1</a>
-    <a href="/product/catalog/?page=2">2</a>
-    <a href="/product/catalog/?page=4">3</a>
+    {% for i in range(low=1, high=pageCount, step=1) and j in range(low=1, high=pageCount, step=1) %}
+        {% if loop.first %}
+            <a href="/product/catalog/?page=0">{{ i }}</a>
+        {% else %}
+            <a href="/product/catalog/?page={{ j + constant('PAGINATION_ITEM_COUNT') }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
     <a href="/product/catalog/?page={{ page }}&action=next">></a>
 </div>
 

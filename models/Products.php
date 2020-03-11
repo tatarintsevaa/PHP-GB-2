@@ -23,6 +23,12 @@ class Products extends DbModel
         $this->price = $price;
     }
 
+    public static function getPagesCount() {
+        $sql = "SELECT COUNT(*) FROM products";
+        $itemsCount = Db::getInstance()->queryOne($sql);
+        return round($itemsCount['COUNT(*)'] / PAGINATION_ITEM_COUNT);
+    }
+
 
     public static function getTableName()
     {

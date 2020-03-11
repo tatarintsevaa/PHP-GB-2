@@ -1,11 +1,11 @@
 <div class="card">
-    <h3><?=$product->name?></h3>
+    <h3><?=$product->{{ product.name }}</h3>
     <div class="card_box">
         <img src="http://via.placeholder.com/300x200" alt="photo">
         <div class="card_box__text">
             <div>
                 <p><strong>Описание товара</strong></p>
-                <p>{{ product.description | row }}</p>
+                <p>{{ product.description}}</p>
             </div>
             <p>Цена <strong>{{ product.price }} руб.</strong></p>
             <button class="by-btn">Купить</button>

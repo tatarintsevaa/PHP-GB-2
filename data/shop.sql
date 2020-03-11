@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 09 2020 г., 17:35
+-- Время создания: Мар 11 2020 г., 18:36
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -93,7 +93,9 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
 (3, 'Шоколад', 'Белый', 12, ''),
 (4, 'Сникерс', 'Заморский', 25, ''),
 (5, 'Кофе', 'Крепкий', 12, ''),
-(10, 'Пирожок', 'С мясом', 20, '');
+(10, 'Пирожок', 'С мясом', 20, ''),
+(11, 'Чай', 'С лимоном', 15, ''),
+(12, 'твикс', 'Двойной', 35, '');
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

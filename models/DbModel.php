@@ -83,10 +83,13 @@ abstract class DbModel extends Model
         return DB::getInstance()->queryAll($sql, ['id' => $id]);
     }
 
-    public static function showLimit($page) {
+    public static function showLimit($page, $itemCount = null) {
         $tableName = static::getTableName();
-        $sql = "SELECT * FROM {$tableName} WHERE 1 LIMIT ?, 2";
-        return Db::getInstance()->executeLimit($sql, $page);
+        $sql = "SELECT * FROM {$tableName} WHERE 1 LIMIT ?";
+        if (!is_null($itemCount)) {
+            $sql .= ", ?";
+        }
+        return Db::getInstance()->executeLimit($sql, $page, $itemCount);
     }
 
     public static function getCartProducts($session_id)

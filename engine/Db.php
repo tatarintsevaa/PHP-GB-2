@@ -72,9 +72,12 @@ class Db
         return $this->getConnection()->lastInsertId();
     }
 
-    public function executeLimit($sql, $page) {
+    public function executeLimit($sql, $page, $itemCount) {
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->bindValue(1, $page, \PDO::PARAM_INT);
+        if (!is_null(!$itemCount)) {
+            $pdoStatement->bindValue(2, $itemCount, \PDO::PARAM_INT);
+        }
         $pdoStatement->execute();
         return $pdoStatement->fetchAll();
     }
