@@ -72,7 +72,7 @@ function save(editBtn, elem, idFeed) {
                 name: name.value,
                 feed: feed.value,
                 headers: {
-                    'Content-type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
             })
         })

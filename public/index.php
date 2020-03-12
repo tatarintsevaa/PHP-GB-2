@@ -4,18 +4,17 @@ include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
 use app\models\{Products, Users, Cart};
-use app\engine\{Autoload, Render, TwigRender};
+use app\engine\{Autoload, Render, TwigRender, Request};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
 include realpath("../vendor/Autoload.php");
 
 
+$request = new Request();
 
-$url = explode('/',$_SERVER['REQUEST_URI']);
-
-$controllerName = $url[1] ?: 'product';
-$actionName = $url[2];
+$controllerName = $request->getControllerName();
+$actionName = $request->getActionName();
 
 //var_dump($controllerName, $actionName);
 
@@ -27,6 +26,7 @@ $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller
 if (class_exists($controllerClass)) {
     $controller = new $controllerClass(new Render());
     $controller->runAction($actionName);
+//    $request = new Request(); возможо здесь нужно создать
 } else die("404 - index");
 
 

@@ -3,6 +3,7 @@
 
 namespace app\controllers;
 
+use app\engine\Request;
 use app\models\Cart;
 
 
@@ -16,7 +17,7 @@ class CartController extends Controller
 
     public function actionBuy()
     {
-        $id = $_GET['id'];
+        $id = (new Request())->getParams()['id'];
         $cartItem = Cart::getOneCartItem($id, session_id());
         if ($cartItem) {
             $cartItem->qty++;
@@ -26,12 +27,13 @@ class CartController extends Controller
             $cartItem->save();
         }
         $qty = Cart::getQty(session_id());
+        header('Content-Type: application/json');
         echo json_encode(['qty' => $qty]);
     }
 
     public function actionDel()
     {
-        $id = $_GET['id'];
+        $id = (new Request())->getParams()['id'];
         $cartItem = Cart::getOne($id);
         if ($cartItem->qty > 1) {
             $cartItem->qty--;
@@ -42,6 +44,7 @@ class CartController extends Controller
             $newQty = 0;
         }
         $qty = Cart::getQty(session_id());
+        header('Content-Type: application/json');
         echo json_encode(['qty' => $qty, 'newQty' => $newQty]);
     }
 

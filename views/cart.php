@@ -46,6 +46,9 @@
                             elem.parentElement.parentElement.remove();
                             // const totalPrice = document.getElementById('total');
                             // totalPrice.innerText = data.totalPrice;
+                            if (data.qty < 1) {
+                                location.reload()
+                            }
                         }
 
                     })

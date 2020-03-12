@@ -13,13 +13,13 @@
                 <p><?=$product->description?></p>
             </div>
             <p>Цена <strong><?=$product->price?> руб.</strong></p>
-            <button class="by-btn">Купить</button>
+            <button class="by-btn" data-id="<?=$product->id?>" >Купить</button>
         </div>
     </div>
 </div>
 <hr>
 <h3>Оставьте отзыв</h3>
-<div id="feedback" ">
+<div id="feedback" >
     <input type="text" placeholder="Имя" id="name">
     <input type="text" placeholder="Отзыв" id="feed">
     <button id="ok" data-id_good="<?= $product->id?>">Отправить</button>
@@ -50,7 +50,30 @@
 
         });
 
-    })
+
+        document.querySelector('.by-btn').addEventListener('click', (evt) => {
+            let id = evt.target.dataset.id;
+            fetch(`/cart/buy/?id=${id}`)
+                .then((response) => response.json())
+
+                .then((data) => {
+                    if (data.qty === 1) {
+                        creatCartQty(data.qty);
+
+                    } else {
+                        updateCartQty(data.qty);
+
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        })
+
+    });
+
+
+
 
 
 </script>

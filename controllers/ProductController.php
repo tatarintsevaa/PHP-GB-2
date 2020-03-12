@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\engine\Request;
 use app\models\Products;
 use app\models\Feedback;
 
@@ -14,12 +15,12 @@ class ProductController extends Controller
 
     public function actionCatalog()
     {
-        $page = (int)$_GET['page'];
+        $page = (new Request())->getParams()['page'];
         if (is_null($_GET['page'])) {
             $page = 0;
         };
 
-        $action = $_GET['action'];
+        $action = (new Request())->getParams()['action'];
         if ($action == 'next' && $page <= PAGINATION_ITEM_COUNT) {
             $page = $page + PAGINATION_ITEM_COUNT;
         } elseif ($action == 'prev' && $page >= PAGINATION_ITEM_COUNT) {
@@ -29,7 +30,7 @@ class ProductController extends Controller
 
         $catalog = Products::showLimit($page, PAGINATION_ITEM_COUNT);
         $step = 0;
-        echo $this->render('catalog', ['catalog' => $catalog, 'page' => $page, 'pageCount' => $pageCount, 'step' => $step]);
+        echo $this->render('catalog', ['catalog' => $catalog, 'page' => $page, 'pageCount' => $pageCount]);
     }
 
     public function actionApiCatalog()
@@ -37,12 +38,11 @@ class ProductController extends Controller
         $catalog = Products::getAll();
         header('Content-Type: application/json');
         echo json_encode($catalog, JSON_UNESCAPED_UNICODE);
-        die();
     }
 
     public function actionCard()
     {
-        $id = (int) $_GET['id'];
+        $id = (new Request())->getParams()['id'];
         $product = Products::getOne($id);
         $feedback = Feedback::getAllFeedback($id);
         echo $this->render('card', ['product' => $product, 'feedback' => $feedback]);
