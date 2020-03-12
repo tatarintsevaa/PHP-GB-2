@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\engine\Render;
 use app\interfaces\IRenderer;
+use app\models\Users;
 
 
 abstract class Controller
@@ -38,7 +39,10 @@ abstract class Controller
         if ($this->useLayout) {
             return $this->renderTemplate("layouts/{$this->layout}", [
                 'header' => $this->renderTemplate('header', [
-                    'cart' => $this->renderTemplate('cartBtn', $params)
+                    'cartBtn' => $this->renderTemplate('cartBtn', [
+                        'auth' => Users::isAuth(),
+                        'username' => Users::getName()
+                    ])
                 ]),
                 'menu' => $this->renderTemplate('menu'),
                 'content' => $this->renderTemplate($templates, $params)
