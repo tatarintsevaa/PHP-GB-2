@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 11 2020 г., 18:36
+-- Время создания: Мар 13 2020 г., 03:00
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -43,10 +43,7 @@ INSERT INTO `cart` (`id`, `id_good`, `session_id`, `qty`) VALUES
 (1, 1, 'p2ji4m0j3b66sepi4qd99ju7bv23s2gs', 2),
 (7, 5, 'p2ji4m0j3b66sepi4qd99ju7bv23s2gs', 1),
 (8, 2, 'p2ji4m0j3b66sepi4qd99ju7bv23s2gs', 5),
-(10, 3, 'va55n5eo6ivpra79iatos0buofttug3t', 2),
-(12, 2, 'va55n5eo6ivpra79iatos0buofttug3t', 3),
-(13, 4, 'va55n5eo6ivpra79iatos0buofttug3t', 1),
-(14, 10, 'va55n5eo6ivpra79iatos0buofttug3t', 1);
+(44, 3, 'va55n5eo6ivpra79iatos0buofttug3t', 1);
 
 -- --------------------------------------------------------
 
@@ -106,18 +103,17 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` text NOT NULL,
-  `pass` text NOT NULL
+  `pass` text NOT NULL,
+  `hash` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `pass`) VALUES
-(1, 'admin', '123'),
-(2, 'user', '123'),
-(3, 'user1', '123'),
-(4, 'user1', '123');
+INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
+(1, 'admin', '$2y$10$GcuyBCmU9ja9qoU3nbvsaeaHoP3/sV5tDgY759yEGmGzrS8CdMXVy', '7034067675e6acb7b649aa0.93698289'),
+(2, 'user', '$2y$10$JjRXDuP11cJgkc5QjibYpOQ0K329dpOFLNTpT.bUecVDMviKLFyPW', '');
 
 --
 -- Индексы сохранённых таблиц
@@ -155,13 +151,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
