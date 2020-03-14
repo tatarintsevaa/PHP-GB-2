@@ -35,13 +35,16 @@ class CartController extends Controller
     {
         $id = (new Request())->getParams()['id'];
         $cartItem = Cart::getOne($id);
-        if ($cartItem->qty > 1) {
-            $cartItem->qty--;
-            $cartItem->save();
-            $newQty = $cartItem->qty;
-        } else {
-            $cartItem->delete();
-            $newQty = 0;
+        $session = session_id();
+        if ($session == $cartItem->session_id) {
+            if ($cartItem->qty > 1) {
+                $cartItem->qty--;
+                $cartItem->save();
+                $newQty = $cartItem->qty;
+            } else {
+                $cartItem->delete();
+                $newQty = 0;
+            }
         }
         $qty = Cart::getQty(session_id());
         header('Content-Type: application/json');
