@@ -60,7 +60,7 @@ class Users extends DbModel
         $hash = uniqid(rand(), true);
         $user->__set('hash', $hash);
         $user->save();
-        setcookie("hash", $hash, time() + 3600);
+        setcookie("hash", $hash, time() + 3600, "/");
     }
 
 
