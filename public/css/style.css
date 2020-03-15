@@ -223,15 +223,19 @@ main {
       justify-content: space-around;
       align-items: center; }
 
-.pagination a {
+.pagination a:hover {
+  background-color: #3C3F41;
+  color: #eeeeee; }
+.pagination_item {
   padding: 5px;
-  text-decoration: none;
   color: #3C3F41;
   border-radius: 30%;
-  transition: all 0.2s ease; }
-  .pagination a:hover {
-    background-color: #3C3F41;
-    color: #eeeeee; }
+  transition: all 0.2s ease;
+  text-decoration: none; }
+
+#active {
+  background-color: lightgray;
+  color: #3C3F41; }
 
 .order_cart td {
   padding: 0 10px;

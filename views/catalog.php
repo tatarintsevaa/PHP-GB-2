@@ -15,11 +15,19 @@
 
 </div>
 <div class="pagination" class="pagination">
-    <a href="/product/catalog/?page=<?= $page ?>&action=prev"><</a>
-    <?php for ($i = 1, $j = 0; $i <= $pageCount; $i++, $j += PAGINATION_ITEM_COUNT): ?>
-        <a href="/product/catalog/?page=<?= $j ?>"><?= $i ?> </a>
+    <? if ($prev >= 1): ?>
+        <a class="pagination_item" href="/product/catalog/?page=<?= $prev ?>"><</a>
+    <? endif; ?>
+    <?php for ($i = 1; $i <= $pageCount; $i++): ?>
+        <? if ($page == $i): ?>
+            <span class="pagination_item" id="active"><?= $i ?></span>
+        <? else: ?>
+            <a class="pagination_item" href="/product/catalog/?page=<?= $i ?>"><?= $i ?></a>
+        <? endif; ?>
     <? endfor; ?>
-    <a href="/product/catalog/?page=<?= $page ?>&action=next">></a>
+    <? if ($next <= $pageCount): ?>
+    <a class="pagination_item" href="/product/catalog/?page=<?= $next ?>">></a>
+    <? endif; ?>
 </div>
 <script>
 

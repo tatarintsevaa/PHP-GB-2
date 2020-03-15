@@ -255,17 +255,21 @@ main
       align-items: center
 
 .pagination
+  & a:hover
+    background-color: $dark
+    color: $light
 
-  a
+  &_item
     padding: 5px
-    text-decoration: none
     color: $dark
     border-radius: 30%
     transition: all 0.2s ease
+    text-decoration: none
 
-    &:hover
-      background-color: $dark
-      color: $light
+#active
+  background-color: lightgray
+  color: $dark
+
 
 .order_cart
   td

@@ -11,23 +11,21 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
 
 
-$request = new Request();
+try {
+    $request = new Request();
 
-$controllerName = $request->getControllerName();
-$actionName = $request->getActionName();
+    $controllerName = $request->getControllerName();
+    $actionName = $request->getActionName();
 
-//var_dump($controllerName, $actionName);
+    $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 
-
-$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
-//var_dump("Controller" . "-" . $controllerClass);
-//var_dump("Action" . "-" .$actionName);
-
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass(new Render());
-    $controller->runAction($actionName);
-//    $request = new Request(); возможо здесь нужно создать
-} else die("404 - index");
+    if (class_exists($controllerClass)) {
+        $controller = new $controllerClass(new Render());
+        $controller->runAction($actionName);
+    } else die("404 - index");
+} catch (\Exception $e) {
+    var_dump($e);
+}
 
 
 
