@@ -20,7 +20,9 @@ abstract class Model implements IModel
 
     public function __get($name)
     {
-        return $this->$name;
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
     }
 
     public function __isset($name)

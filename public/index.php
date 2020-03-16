@@ -5,6 +5,7 @@ include realpath("../engine/Autoload.php");
 
 use app\models\{Products, Users, Cart};
 use app\engine\{Autoload, Render, TwigRender, Request};
+use app\controllers\ProductController;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
@@ -22,7 +23,16 @@ try {
     if (class_exists($controllerClass)) {
         $controller = new $controllerClass(new Render());
         $controller->runAction($actionName);
-    } else die("404 - index");
+    } else {
+//        echo (new Render())->renderTemplate('error');
+//        throw new Exception('Не верный контроллер', 404);
+        $controller = new ProductController(new Render());
+        echo $controller->render('error');
+    }
+} catch (\PDOException $e) {
+    $controller = new ProductController(new Render());
+    echo $controller->render('error', ['message' => $e->getMessage()]);
+//    echo $e->getMessage();
 } catch (\Exception $e) {
     var_dump($e);
 }

@@ -10,18 +10,9 @@ use app\models\Cart;
 
 class ApiController extends Controller
 {
-//    private function getDataPost() {
-//        $data = json_decode(file_get_contents('php://input'));
-//        $parsedData = [
-//            'name' => $data->name,
-//            'feed' => $data->feed,
-//            'id_good' => $data->id_good,
-//        ];
-//        return $parsedData;
-//    }
+
 
     public function actionAdd() {
-//        $data = $this->getDataPost();
         $data = (new Request())->getParams();
         $feedback = new Feedback($data['name'], $data['feed'], $data['id_good']);
         $feedback->save();

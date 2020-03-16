@@ -27,10 +27,11 @@ abstract class Controller
     {
         $this->action = $action ?: $this->defaultAction;
         $method = "action" . ucfirst($this->action);
-//        var_dump($method);
         if (method_exists($this, $method)) {
             $this->$method();
-        } else die("404 - controller");
+        } else {
+           echo $this->render('error');
+        }
     }
 
 

@@ -38,7 +38,6 @@ function newSession() {
 
 const name = document.getElementById('name');
 const feed = document.getElementById('feed');
-const id = document.getElementById('feedback').dataset.id_good;
 const btnOk = document.getElementById('ok');
 
 function editEvent(elem) {

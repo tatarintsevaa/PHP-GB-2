@@ -47,8 +47,12 @@ class ProductController extends Controller
     {
         $id = (new Request())->getParams()['id'];
         $product = Products::getOne($id);
-        $feedback = Feedback::getAllFeedback($id);
-        echo $this->render('card', ['product' => $product, 'feedback' => $feedback]);
+        if (($product)) {
+            $feedback = Feedback::getAllFeedback($id);
+            echo $this->render('card', ['product' => $product, 'feedback' => $feedback]);
+        } else {
+            echo $this->render('error');
+        }
     }
 
 }
