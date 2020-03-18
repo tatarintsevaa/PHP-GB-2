@@ -2,8 +2,7 @@
 
 namespace app\engine;
 
-use app\traits\Tsingletone;
-use http\Params;
+use app\traits\TSingletone;
 
 class Db
 {
@@ -16,7 +15,7 @@ class Db
         'charset' => 'utf8'
     ];
 
-    use Tsingletone;
+    use TSingletone;
 
     private $connection = null;
 

@@ -1,10 +1,12 @@
 <?php
 
 
-namespace app\models;
+namespace app\models\entities;
 
 
-class Feedback extends DbModel
+use app\models\Model;
+
+class Feedback extends Model
 {
     protected $name;
     protected $feedback;
@@ -24,12 +26,5 @@ class Feedback extends DbModel
         $this->feedback = $feedback;
         $this->id_good = $id_good;
     }
-
-
-    public static function getTableName()
-    {
-        return "feedback";
-    }
-
 
 }

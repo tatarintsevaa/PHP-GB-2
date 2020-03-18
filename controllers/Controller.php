@@ -3,6 +3,7 @@
 
 namespace app\controllers;
 
+use app\engine\App;
 use app\engine\Render;
 use app\interfaces\IRenderer;
 use app\models\Users;
@@ -41,8 +42,8 @@ abstract class Controller
             return $this->renderTemplate("layouts/{$this->layout}", [
                 'header' => $this->renderTemplate('header', [
                     'cartBtn' => $this->renderTemplate('cartBtn', [
-                        'auth' => Users::isAuth(),
-                        'username' => Users::getName()
+                        'auth' => App::call()->usersRepository->isAuth(),
+                        'username' => App::call()->usersRepository->getName(),
                     ])
                 ]),
                 'menu' => $this->renderTemplate('menu'),

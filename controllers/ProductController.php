@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\engine\App;
 use app\engine\Request;
 use app\models\Products;
 use app\models\Feedback;
@@ -15,20 +16,22 @@ class ProductController extends Controller
 
     public function actionCatalog()
     {
-        $page = (new Request())->getParams()['page'];
+        $page = (int)App::call()->request->getParams()['page'];
         if (is_null($_GET['page'])) {
             $page = 1;
         };
 
-        $action = (new Request())->getParams()['action'];
+        $action = App::call()->request->getParams()['action'];
         if ($action == 'next') {
             $page++;
         } elseif ($action == 'prev') {
             $page--;
         }
-        $pageCount = Products::getPagesCount();
+        $pageCount = App::call()->productRepository->getPagesCount();
 
-        $catalog = Products::showLimit((($page - 1) * PAGINATION_ITEM_COUNT), PAGINATION_ITEM_COUNT);
+        $qtyDisplayedItems = App::call()->config['qty_displayed_items'];
+
+        $catalog = App::call()->productRepository->showLimit((($page - 1) * $qtyDisplayedItems), $qtyDisplayedItems);
         echo $this->render('catalog', ['catalog' => $catalog,
                                                 'page' => $page,
                                                 'next' => $page + 1,
@@ -38,17 +41,17 @@ class ProductController extends Controller
 
     public function actionApiCatalog()
     {
-        $catalog = Products::getAll();
+        $catalog = App::call()->productRepository->getAll();
         header('Content-Type: application/json');
         echo json_encode($catalog, JSON_UNESCAPED_UNICODE);
     }
 
     public function actionCard()
     {
-        $id = (new Request())->getParams()['id'];
-        $product = Products::getOne($id);
+        $id = App::call()->request->getParams()['id'];
+        $product = App::call()->productRepository->getOne($id);
         if (($product)) {
-            $feedback = Feedback::getAllFeedback($id);
+            $feedback = App::call()->feedbackRepository->getAllFeedback($id);
             echo $this->render('card', ['product' => $product, 'feedback' => $feedback]);
         } else {
             echo $this->render('error');

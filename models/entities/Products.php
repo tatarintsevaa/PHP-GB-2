@@ -1,10 +1,11 @@
 <?php
 
-namespace app\models;
+namespace app\models\entities;
 
 use app\engine\Db;
+use app\models\Model;
 
-class Products extends DbModel
+class Products extends Model
 {
     protected $name;
     protected $description;
@@ -23,17 +24,8 @@ class Products extends DbModel
         $this->price = $price;
     }
 
-    public static function getPagesCount() {
-        $sql = "SELECT COUNT(*) FROM products";
-        $itemsCount = Db::getInstance()->queryOne($sql);
-        return round($itemsCount['COUNT(*)'] / PAGINATION_ITEM_COUNT);
-    }
 
 
-    public static function getTableName()
-    {
-        return "products";
-    }
 
 
 }

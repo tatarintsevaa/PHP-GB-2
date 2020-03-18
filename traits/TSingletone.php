@@ -2,7 +2,7 @@
 
 namespace app\traits;
 
-trait Tsingletone
+trait TSingletone
 {
     private function __construct()  {}
     private function __clone()  {}

@@ -1,28 +1,13 @@
 <?php
+namespace app\models\repositories;
 
-namespace app\models;
+use app\engine\App;
+use app\models\Repository;
+use app\models\entities\Users;
 
-class Users extends DbModel
+class UsersRepository extends Repository
 {
-    protected $id;
-    protected $login;
-    protected $pass;
-    protected $hash;
-
-    protected $props = [
-        'login' => false,
-        'pass' => false,
-        'hash' => false
-    ];
-
-
-    public function __construct($login = null, $pass = null)
-    {
-        $this->login = $login;
-        $this->pass = $pass;
-    }
-
-    public static function isAuth()
+    public function isAuth()
     {
         if (isset($_COOKIE["hash"])) {
             $hash = $_COOKIE["hash"];
@@ -35,39 +20,41 @@ class Users extends DbModel
         return isset($_SESSION['login']);
     }
 
-    public static function getName()
+    public function getName()
     {
         return $_SESSION['login'];
     }
 
-    public static function auth($login, $pass)
+    public function auth($login, $pass)
     {
         $user = static::getOneWhere('login', $login);
         if (password_verify($pass, $user->pass)) {
             $_SESSION['login'] = $login;
+            $_SESSION['id'] = $user->id;
             return true;
         } else {
             return false;
         }
     }
 
-    public static function updateHash($login)
+    public function updateHash()
     {
-        /**
-         * @var DbModel $user
-         */
-        $user = static::getOneWhere('login', $login);
+        $id = (int)$_SESSION['id'];
+        $user = App::call()->usersRepository->getOneWhere('id', $id);
         $hash = uniqid(rand(), true);
-        $user->__set('hash', $hash);
-        $user->save();
+//        $user->__set('hash', $hash);
+        $user->hash = $hash;
+        App::call()->usersRepository->save($user);
         setcookie("hash", $hash, time() + 3600, "/");
     }
 
-
-    public static function getTableName()
+    public function getTableName()
     {
         return "users";
     }
 
+    public function getEntityClass() {
+        return Users::class;
+    }
 
 }

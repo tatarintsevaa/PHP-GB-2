@@ -4,8 +4,7 @@
 namespace app\controllers;
 
 
-use app\engine\Request;
-use app\models\Users;
+use app\engine\App;
 
 class AuthController extends Controller
 {
@@ -16,12 +15,12 @@ class AuthController extends Controller
 
     public function actionLogin()
     {
-        $login = (new Request())->getParams()['login'];
-        $pass = (new Request())->getParams()['pass'];
-        $save = (new Request())->getParams()['save'];
-        if (Users::auth($login, $pass)) {
+        $login = App::call()->request->getParams()['login'];
+        $pass = App::call()->request->getParams()['pass'];
+        $save = App::call()->request->getParams()['save'];
+        if (App::call()->usersRepository->auth($login, $pass)) {
             if (isset($save)) {
-                Users::updateHash($login);
+                App::call()->usersRepository->updateHash();
             }
             header("Location: /");
         } else {

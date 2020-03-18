@@ -1,34 +1,28 @@
 <?php
 session_start();
-include realpath("../config/config.php");
+
+use app\engine\App;
+use app\engine\Autoload;
+
 include realpath("../engine/Autoload.php");
 
-use app\models\{Products, Users, Cart};
-use app\engine\{Autoload, Render, TwigRender, Request};
-use app\controllers\ProductController;
+
+$config = include __DIR__ . "/../config/config.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
 include realpath("../vendor/Autoload.php");
 
 
+//$product = (new ProductRepository())->getOne(1);
+//$product->price = 125;
+//(new ProductRepository())->save($product);
+//var_dump($_SESSION);
+//
+//die();
+
 try {
-    $request = new Request();
-
-    $controllerName = $request->getControllerName();
-    $actionName = $request->getActionName();
-
-    $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
-
-    if (class_exists($controllerClass)) {
-        $controller = new $controllerClass(new Render());
-        $controller->runAction($actionName);
-    } else {
-//        echo (new Render())->renderTemplate('error');
-//        throw new Exception('Не верный контроллер', 404);
-        $controller = new ProductController(new Render());
-        echo $controller->render('error');
-    }
+    App::call()->run($config);
 } catch (\PDOException $e) {
     $controller = new ProductController(new Render());
     echo $controller->render('error', ['message' => $e->getMessage()]);

@@ -4,25 +4,26 @@
 namespace app\controllers;
 
 
-use app\engine\Request;
-use app\models\Feedback;
-use app\models\Cart;
+use app\engine\App;
+use app\models\entities\Feedback;
 
 class ApiController extends Controller
 {
 
 
     public function actionAdd() {
-        $data = (new Request())->getParams();
+        $data = App::call()->request->getParams();
         $feedback = new Feedback($data['name'], $data['feed'], $data['id_good']);
-        $feedback->save();
+        App::call()->feedbackRepository->save($feedback);
         header('Content-Type: application/json');
         echo json_encode(['id' => $feedback->id]);
     }
 
     public function actionEdit() {
-        $id_feed = (new Request())->getParams()['id_feed'];
-        $feedback = Feedback::getOne($id_feed);
+        //Как правильно? Сделать функцию получения одного отзыва тут, или в репозитории отзыва. Но тогда нужно будет
+        //обратиться к request оттуда...
+        $id_feed = App::call()->request->getParams()['id_feed'];
+        $feedback = App::call()->feedbackRepository->getOne($id_feed);
         header('Content-Type: application/json');
         echo json_encode(['name' => $feedback->name, 'feed' => $feedback->feedback]);
     }
@@ -31,12 +32,12 @@ class ApiController extends Controller
         /**
          * @var Feedback $feedback
          */
-        $id_feed = (new Request())->getParams()['id_feed'];
-        $data = (new Request())->getParams();
-        $feedback = Feedback::getOne($id_feed);
+        $id_feed = App::call()->request->getParams()['id_feed'];
+        $data = App::call()->request->getParams();
+        $feedback = App::call()->feedbackRepository->getOne($id_feed);
         $feedback->name = $data['name'];
         $feedback->feedback = $data['feed'];
-        $result = $feedback->save();
+        $result = App::call()->feedbackRepository->save($feedback);
         header('Content-Type: application/json');
         echo json_encode(['status' => $result]);
     }
@@ -45,15 +46,15 @@ class ApiController extends Controller
         /**
          * @var Feedback $feedback
          */
-        $id_feed = (new Request())->getParams()['id_feed'];
-        $feedback = Feedback::getOne($id_feed);
-        $result = $feedback->delete();
+        $id_feed = App::call()->request->getParams()['id_feed'];
+        $feedback = App::call()->feedbackRepository->getOne($id_feed);
+        $result = App::call()->feedbackRepository->delete($feedback);
         header('Content-Type: application/json');
         echo json_encode(['status' => $result]);
     }
 
     public function actionCartQty() {
-        $qty = Cart::getQty(session_id());
+        $qty = App::call()->cartRepository->getQty(session_id());
         header('Content-Type: application/json');
         echo json_encode(['qty' => $qty]);
     }
