@@ -10,11 +10,13 @@ class Users extends Model
     protected $login;
     protected $pass;
     protected $hash;
+    protected $role;
 
     protected $props = [
         'login' => false,
         'pass' => false,
-        'hash' => false
+        'hash' => false,
+        'role' => false
     ];
 
 

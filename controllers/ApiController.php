@@ -20,37 +20,37 @@ class ApiController extends Controller
     }
 
     public function actionEdit() {
-        //Как правильно? Сделать функцию получения одного отзыва тут, или в репозитории отзыва. Но тогда нужно будет
-        //обратиться к request оттуда...
-        $id_feed = App::call()->request->getParams()['id_feed'];
-        $feedback = App::call()->feedbackRepository->getOne($id_feed);
-        header('Content-Type: application/json');
-        echo json_encode(['name' => $feedback->name, 'feed' => $feedback->feedback]);
+        if (App::call()->usersRepository->isAdmin()) {
+            $id_feed = App::call()->request->getParams()['id_feed'];
+            $feedback = App::call()->feedbackRepository->getOne($id_feed);
+            header('Content-Type: application/json');
+            echo json_encode(['name' => $feedback->name, 'feed' => $feedback->feedback]);
+        }
+
     }
 
     public function actionSave() {
-        /**
-         * @var Feedback $feedback
-         */
-        $id_feed = App::call()->request->getParams()['id_feed'];
-        $data = App::call()->request->getParams();
-        $feedback = App::call()->feedbackRepository->getOne($id_feed);
-        $feedback->name = $data['name'];
-        $feedback->feedback = $data['feed'];
-        $result = App::call()->feedbackRepository->save($feedback);
-        header('Content-Type: application/json');
-        echo json_encode(['status' => $result]);
+        if (App::call()->usersRepository->isAdmin()) {
+            $id_feed = App::call()->request->getParams()['id_feed'];
+            $data = App::call()->request->getParams();
+            $feedback = App::call()->feedbackRepository->getOne($id_feed);
+            $feedback->name = $data['name'];
+            $feedback->feedback = $data['feed'];
+            $result = App::call()->feedbackRepository->save($feedback);
+            header('Content-Type: application/json');
+            echo json_encode(['status' => $result]);
+        }
+
     }
 
     public function actionDelete() {
-        /**
-         * @var Feedback $feedback
-         */
-        $id_feed = App::call()->request->getParams()['id_feed'];
-        $feedback = App::call()->feedbackRepository->getOne($id_feed);
-        $result = App::call()->feedbackRepository->delete($feedback);
-        header('Content-Type: application/json');
-        echo json_encode(['status' => $result]);
+        if (App::call()->usersRepository->isAdmin()) {
+            $id_feed = App::call()->request->getParams()['id_feed'];
+            $feedback = App::call()->feedbackRepository->getOne($id_feed);
+            $result = App::call()->feedbackRepository->delete($feedback);
+            header('Content-Type: application/json');
+            echo json_encode(['status' => $result]);
+        }
     }
 
     public function actionCartQty() {

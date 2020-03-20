@@ -6,18 +6,20 @@ use app\traits\TSingletone;
 
 class Db
 {
-    private $config = [
-        'driver' => 'mysql',
-        'host' => 'localhost',
-        'login' => 'root',
-        'password' => '',
-        'database' => 'shop',
-        'charset' => 'utf8'
-    ];
-
-    use TSingletone;
-
+    private $config;
     private $connection = null;
+
+    public function __construct($driver, $host, $login, $password, $database, $charset = "utf8")
+    {
+        $this->config['driver'] = $driver;
+        $this->config['host'] = $host;
+        $this->config['login'] = $login;
+        $this->config['password'] = $password;
+        $this->config['database'] = $database;
+        $this->config['charset'] = $charset;
+    }
+
+
 
     private function getConnection() {
         if (is_null($this->connection)) {
@@ -68,7 +70,7 @@ class Db
     }
 
     public function getLustInsertId() {
-        return $this->getConnection()->lastInsertId();
+        return $this->connection->lastInsertId();
     }
 
     public function executeLimit($sql, $page, $itemCount) {

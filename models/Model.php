@@ -10,7 +10,7 @@ abstract class Model
 
     public function __set($name, $value)
     {
-        if (isset($this->props[$name])) {
+        if (property_exists($this, $name)) {
             $this->$name = $value;
             $this->props[$name] = true;
         }

@@ -18,11 +18,12 @@ class AuthController extends Controller
         $login = App::call()->request->getParams()['login'];
         $pass = App::call()->request->getParams()['pass'];
         $save = App::call()->request->getParams()['save'];
+        $backpath = App::call()->request->getParams()['backpath'];
         if (App::call()->usersRepository->auth($login, $pass)) {
             if (isset($save)) {
                 App::call()->usersRepository->updateHash();
             }
-            header("Location: /");
+            header("Location: {$backpath}");
         } else {
             Die("Не верный пароль!");
         };

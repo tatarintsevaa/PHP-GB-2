@@ -4,14 +4,15 @@ session_start();
 use app\engine\App;
 use app\engine\Autoload;
 
-include realpath("../engine/Autoload.php");
+//include realpath("../engine/Autoload.php");
 
 
 $config = include __DIR__ . "/../config/config.php";
 
-spl_autoload_register([new Autoload(), 'loadClass']);
+//spl_autoload_register([new Autoload(), 'loadClass']);
 
 include realpath("../vendor/Autoload.php");
+
 
 
 //$product = (new ProductRepository())->getOne(1);

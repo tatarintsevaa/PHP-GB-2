@@ -3,9 +3,6 @@
 namespace app\controllers;
 
 use app\engine\App;
-use app\engine\Request;
-use app\models\Products;
-use app\models\Feedback;
 
 class ProductController extends Controller
 {
@@ -52,7 +49,9 @@ class ProductController extends Controller
         $product = App::call()->productRepository->getOne($id);
         if (($product)) {
             $feedback = App::call()->feedbackRepository->getAllFeedback($id);
-            echo $this->render('card', ['product' => $product, 'feedback' => $feedback]);
+            echo $this->render('card', ['product' => $product,
+                                                  'feedback' => $feedback,
+                                                  'isAdmin' => App::call()->usersRepository->isAdmin(),]);
         } else {
             echo $this->render('error');
         }

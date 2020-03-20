@@ -25,6 +25,12 @@ class UsersRepository extends Repository
         return $_SESSION['login'];
     }
 
+    public function isAdmin() {
+        $login = $this->getName();
+        $user = static::getOneWhere('login', $login);
+        return $user->role == 1 ? true : false;
+    }
+
     public function auth($login, $pass)
     {
         $user = static::getOneWhere('login', $login);

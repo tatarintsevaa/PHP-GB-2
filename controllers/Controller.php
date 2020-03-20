@@ -4,9 +4,7 @@
 namespace app\controllers;
 
 use app\engine\App;
-use app\engine\Render;
 use app\interfaces\IRenderer;
-use app\models\Users;
 
 
 abstract class Controller

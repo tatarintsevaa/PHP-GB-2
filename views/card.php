@@ -30,8 +30,10 @@
     <? foreach ($feedback as $value): ?>
         <div>
             <span><strong><?= $value['name'] ?></strong>: <?= $value['feedback'] ?></span>
+            <? if ($isAdmin) :?>
             <a href="/" class="edit" data-id_feed="<?= $value['id'] ?>">[править]</a>
             <a href="/" class="del" data-id_feed="<?= $value['id'] ?>">[X]</a>
+            <?endif;?>
         </div>
     <? endforeach; ?>
 </div>

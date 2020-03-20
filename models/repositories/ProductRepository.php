@@ -11,7 +11,7 @@ class ProductRepository extends Repository
 
     public function getPagesCount() {
         $sql = "SELECT COUNT(*) FROM products";
-        $itemsCount = Db::getInstance()->queryOne($sql);
+        $itemsCount = App::call()->db->queryOne($sql);
         return round($itemsCount['COUNT(*)'] / App::call()->config['qty_displayed_items']);
     }
 

@@ -51,9 +51,9 @@ class App
             $controller = new $controllerClass(new Render());
             $controller->runAction($this->action);
         } else {
-            echo "Не правильный контроллер";
-//            $controller = new ProductController(new Render());
-//            echo $controller->render('error');
+//            echo "Не правильный контроллер";
+            $controller = new ProductController(new Render());
+            echo $controller->render('error');
         }
     }
 
