@@ -1,4 +1,4 @@
-<h1>Корзина</h1>
+<h1 class="section-name">Корзина</h1>
 <div class="order">
     <? if (empty($cart)) : ?>
         <h1>Ваша корзина пуста</h1>
@@ -23,10 +23,22 @@
                 </tr>
             <? endforeach; ?>
         </table>
+        <div class="order_details">
+            <div class="order_details__total">
+                <p>Сумма заказа</p>
+                <p><span id="total"><?= $total ?></span> руб.</p>
+            </div>
+            <div class="order_details__checkout">
+                <input type="text" name="name" placeholder="ФИО" id="name">
+                <input type="text" name="phone" placeholder="Номер телефона" id="phone">
+                <button class="checkoutBtn ">Оформить заказ</button>
+            </div>
+        </div>
     <? endif; ?>
-    <div class="order_details"></div>
+
 </div>
 <script>
+
     addEventListener('DOMContentLoaded', () => {
         let delBtn = document.querySelectorAll('.btn-rem');
         delBtn.forEach((elem) => {
@@ -38,14 +50,13 @@
                     .then((data) => {
                         updateCartQty(data.qty);
                         const newQty = data.newQty;
+                        const totalPrice = document.getElementById('total');
                         if (newQty >= 1) {
                             elem.parentElement.previousElementSibling.previousElementSibling.textContent = newQty;
-                            // const totalPrice = document.getElementById('total');
-                            // totalPrice.innerText = data.totalPrice;
+                            totalPrice.innerText = data.total;
                         } else {
                             elem.parentElement.parentElement.remove();
-                            // const totalPrice = document.getElementById('total');
-                            // totalPrice.innerText = data.totalPrice;
+                            totalPrice.innerText = data.total;
                             if (data.qty < 1) {
                                 location.reload()
                             }
@@ -56,6 +67,50 @@
                         console.log(error);
                     })
             })
+        });
+
+        const checkoutBtn = document.querySelector('.checkoutBtn');
+        checkoutBtn.addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const phoneNum = document.getElementById('phone').value;
+            const totalPrice = document.getElementById('total').value;
+            let elem = document.querySelector('.red');
+            if (name === '' || phoneNum === '') {
+                if (elem == null) {
+                    elem = document.createElement('p');
+                    checkoutBtn.insertAdjacentElement('beforebegin', elem);
+                    elem.className = 'red';
+                    elem.innerText = 'Заполните все поля!'
+                }
+            } else {
+                if (elem) {
+                    elem.remove();
+                }
+                fetch('/cart/checkout', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: name,
+                        phoneNum: phoneNum,
+                    }),
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.id !== 0) {
+                            elem = document.createElement('p');
+                            elem.className = 'red';
+                            elem.innerText = `Ваш заказ на сумму ${data.totalPrice} руб. успешно оформлен!`;
+                            checkoutBtn.insertAdjacentElement('afterend', elem);
+                            checkoutBtn.remove();
+                            document.querySelector('.cart_qty').remove();
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            }
         });
     });
 

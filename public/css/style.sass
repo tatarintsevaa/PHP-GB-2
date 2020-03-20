@@ -163,7 +163,6 @@ main
   transition: all 0.2s
   color: #fff
 
-
   &:hover
     cursor: pointer
     background-color: $light
@@ -271,11 +270,72 @@ main
   background-color: lightgray
   color: $dark
 
+.order
+  width: 80%
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  &_cart
+    td
+      padding: 0 10px
+      text-align: center
 
-.order_cart
-  td
-    padding: 0 10px
-    text-align: center
+  &_details
+    width: 40%
+    display: flex
+    flex-direction: column
+    align-items: center
+    &__total
+      min-width: 25%
+      text-align: center
+      background-color: $light
+      padding: 5px 15px
+      margin-bottom: 0.5rem
+      & p:first-of-type
+        font-size: 0.8rem
+      & p:last-of-type
+        font-size: 1rem
+    &__checkout
+      width: 50%
+      display: flex
+      flex-direction: column
+      align-items: center
+      & input
+        border-radius: 10px 10px 10px 10px
+        border: 1px solid $dark
+        font-size: 1rem
+        padding: 0.2rem 0.5rem
+        margin-bottom: 0.5rem
+        outline: none
+
+
+.checkoutBtn
+  .by-btn
+  font-size: 18px
+  width: max-content
+  height: 35px
+  padding-right: 5px
+  padding-left: 5px
+  border: 1px solid $dark
+  border-radius: 10px 10px 10px 10px
+  //box-shadow: 0 0 10px rgba(0,0,0,0.5)
+  background-color: $dark
+  outline: none
+  line-height: 18px
+  transition: all 0.2s
+  color: #fff
+
+  &:hover
+    cursor: pointer
+    background-color: $light
+    color: black
+
+
+#total
+  font-size: 2rem
+
+
+
 
 .auth
   margin-top: 10px
@@ -290,3 +350,5 @@ main
   & span
     color: $light
     margin-right: 10px
+
+

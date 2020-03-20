@@ -6,6 +6,7 @@ namespace app\controllers;
 use app\engine\App;
 use app\engine\Request;
 use app\models\entities\Cart;
+use app\models\entities\Orders;
 use app\models\repositories\CartRepository;
 
 
@@ -14,7 +15,8 @@ class CartController extends Controller
     public function actionIndex()
     {
         $cart = App::call()->cartRepository->getCartProducts(session_id());
-        echo $this->render('cart', ['cart' => $cart]);
+        $totalPrice = App::call()->cartRepository->totalPrice($cart);
+        echo $this->render('cart', ['cart' => $cart, 'total' => $totalPrice]);
     }
 
     public function actionBuy()
@@ -51,9 +53,21 @@ class CartController extends Controller
             }
         }
         $qty = App::call()->cartRepository->getQty(session_id());
+        $cart = App::call()->cartRepository->getCartProducts(session_id());
+        $totalPrice = App::call()->cartRepository->totalPrice($cart);
         header('Content-Type: application/json');
-        echo json_encode(['qty' => $qty, 'newQty' => $newQty]);
+        echo json_encode(['qty' => $qty, 'newQty' => $newQty, 'total' => $totalPrice]);
     }
 
-
+    public function actionCheckout() {
+        $name = App::call()->request->getParams()['name'];
+        $phone = App::call()->request->getParams()['phoneNum'];
+        $cart = App::call()->cartRepository->getCartProducts(session_id());
+        $price = App::call()->cartRepository->totalPrice($cart);
+        $order = new Orders(session_id(),$name, (int)$phone, $price);
+        App::call()->ordersRepository->save($order);
+        session_regenerate_id();
+        header('Content-Type: application/json');
+        echo json_encode([ 'totalPrice' => $order->price, 'id' => $order->id]);
+    }
 }

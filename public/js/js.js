@@ -26,15 +26,7 @@ function updateCartQty(qty) {
     }
 }
 
-function newSession() {
-    fetch('/api/newSession')
-        .then(() => {
-            document.location.href = '/';
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-}
+
 
 const name = document.getElementById('name');
 const feed = document.getElementById('feed');

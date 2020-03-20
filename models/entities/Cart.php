@@ -23,7 +23,6 @@ class Cart extends Model
         $this->session_id = $session_id;
         $this->qty = $qty;
         $this->id = $id;
-
     }
 
 }

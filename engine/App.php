@@ -8,6 +8,7 @@ use app\models\repositories\CartRepository;
 use app\models\repositories\ProductRepository;
 use app\models\repositories\UsersRepository;
 use app\models\repositories\FeedbackRepository;
+use app\models\repositories\OrdersRepository;
 use app\traits\TSingletone;
 
 /**
@@ -17,6 +18,7 @@ use app\traits\TSingletone;
  * @property UsersRepository $usersRepository
  * @property ProductRepository $productRepository
  * @property FeedbackRepository $feedbackRepository
+ * @property OrdersRepository $ordersRepository
  * @property Db $db
  */
 class App

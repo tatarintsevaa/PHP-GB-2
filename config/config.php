@@ -5,6 +5,7 @@ use app\models\repositories\CartRepository;
 use app\models\repositories\ProductRepository;
 use app\models\repositories\UsersRepository;
 use app\models\repositories\FeedbackRepository;
+use app\models\repositories\OrdersRepository;
 use app\engine\Db;
 
 define('DS', DIRECTORY_SEPARATOR);
@@ -45,6 +46,9 @@ return [
         ],
         'usersRepository' => [
             'class' => UsersRepository::class
+        ],
+        'ordersRepository' => [
+            'class' => OrdersRepository::class
         ]
     ]
 ];
