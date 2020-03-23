@@ -13,7 +13,11 @@
             </tr>
             <? foreach ($cart as $item): ?>
                 <tr>
-                    <td><img src="http://via.placeholder.com/80x50" alt=""></td>
+                    <? if (is_null($item['image'])):?>
+                        <td><img src="http://via.placeholder.com/80x50" alt=""></td>
+                    <?else:?>
+                        <td><img src="/img/small/<?= $item['image'] ?>" alt="<?= $item['name']?>"></td>
+                    <?endif;?>
                     <td><?= $item['name'] ?></td>
                     <td><?= $item['qty'] ?></td>
                     <td><?= $item['price'] ?> руб.</td>

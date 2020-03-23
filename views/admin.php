@@ -11,6 +11,7 @@
     <?php foreach ($orders as $item): ?>
         <tr>
             <td><?= $item['id'] ?></td>
+            <td><?= $item['user'] ?></td>
             <td><?= $item['name'] ?></td>
             <td><?= $item['phone'] ?></td>
             <? if ((int)$item['status'] == 1): ?>

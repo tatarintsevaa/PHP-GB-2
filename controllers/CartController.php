@@ -19,14 +19,14 @@ class CartController extends Controller
 
     public function actionBuy()
     {
-
         $id = App::call()->request->getParams()['id'];
         $cartItem = App::call()->cartRepository->getOneCartItem($id, session_id());
         if ($cartItem) {
             $cartItem->qty++;
             App::call()->cartRepository->save($cartItem);
         } else {
-            $cartItem = new Cart($id, session_id());
+            $user = App::call()->usersRepository->getName();
+            $cartItem = new Cart($id, session_id(), $user);
             App::call()->cartRepository->save($cartItem);
         }
         $qty = App::call()->cartRepository->getQty(session_id());
@@ -39,8 +39,9 @@ class CartController extends Controller
         $id = App::call()->request->getParams()['id'];
         $cartItem = App::call()->cartRepository->getOne($id);
         $session = session_id();
+        $userName = App::call()->usersRepository->getName();
         $newQty = null;
-        if ($session == $cartItem->session_id) {
+        if ($session == $cartItem->session_id || $userName == $cartItem->user) {
             if ($cartItem->qty > 1) {
                 $cartItem->qty--;
                 App::call()->cartRepository->save($cartItem);
@@ -62,7 +63,8 @@ class CartController extends Controller
         $phone = App::call()->request->getParams()['phoneNum'];
         $cart = App::call()->cartRepository->getCartProducts(session_id());
         $price = App::call()->cartRepository->totalPrice($cart);
-        $order = new Orders(session_id(),$name, (int)$phone, $price);
+        $user = App::call()->usersRepository->getName();
+        $order = new Orders(session_id(),$name, (int)$phone, $price, $user);
         App::call()->ordersRepository->save($order);
         session_regenerate_id();
         header('Content-Type: application/json');

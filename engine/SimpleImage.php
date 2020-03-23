@@ -118,4 +118,10 @@ class SimpleImage {
         }
     }
 
+    public function deleteImage($imageName) {
+        unlink(App::call()->config['big_image_dir'] . $imageName);
+        unlink(App::call()->config['middle_image_dir'] . $imageName);
+        unlink(App::call()->config['small_image_dir'] . $imageName);
+    }
+
 }

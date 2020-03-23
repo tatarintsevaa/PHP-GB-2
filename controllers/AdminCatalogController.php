@@ -46,9 +46,7 @@ class AdminCatalogController extends Controller
             $id = App::call()->request->getParams()['id'];
             $product = App::call()->productRepository->getOne($id);
             if (!is_null($product->image)) {
-                unlink(App::call()->config['big_image_dir'] . $product->image);
-                unlink(App::call()->config['middle_image_dir'] . $product->image);
-                unlink(App::call()->config['small_image_dir'] . $product->image);
+                App::call()->simpleImage->deleteImage($product->image);
             }
             $result = App::call()->productRepository->delete($product);
             header('Content-Type: application/json');

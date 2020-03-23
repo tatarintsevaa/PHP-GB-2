@@ -1,28 +1,28 @@
-<?php
-/**
- * @var \app\models\Products $product
- */
-?>
+
 <div class="card">
-    <h3><?=$product->name?></h3>
+    <h3><?= $product->name ?></h3>
     <div class="card_box">
-        <img src="http://via.placeholder.com/300x200" alt="photo">
+        <? if (is_null($product->image)): ?>
+            <img src="http://via.placeholder.com/300x200" alt="photo">
+        <? else: ?>
+            <img src="/img/big/<?= $product->image ?>" alt="<?= $product->name?>" width="300">
+        <? endif; ?>
         <div class="card_box__text">
             <div>
                 <p><strong>Описание товара</strong></p>
-                <p><?=$product->description?></p>
+                <p><?= $product->description ?></p>
             </div>
-            <p>Цена <strong><?=$product->price?> руб.</strong></p>
-            <button class="by-btn" data-id="<?=$product->id?>" >Купить</button>
+            <p>Цена <strong><?= $product->price ?> руб.</strong></p>
+            <button class="by-btn" data-id="<?= $product->id ?>">Купить</button>
         </div>
     </div>
 </div>
 <hr>
 <h3>Оставьте отзыв</h3>
-<div id="feedback" >
+<div id="feedback">
     <input type="text" placeholder="Имя" id="name">
     <input type="text" placeholder="Отзыв" id="feed">
-    <button id="ok" data-id_good="<?= $product->id?>">Отправить</button>
+    <button id="ok" data-id_good="<?= $product->id ?>">Отправить</button>
 </div>
 <br>
 <h3>Отзывы</h3>
@@ -30,10 +30,11 @@
     <? foreach ($feedback as $value): ?>
         <div>
             <span><strong><?= $value['name'] ?></strong>: <?= $value['feedback'] ?></span>
-            <? if ($isAdmin) :?>
-            <a href="/" class="edit" data-id_feed="<?= $value['id'] ?>">[править]</a>
-            <a href="/" class="del" data-id_feed="<?= $value['id'] ?>">[X]</a>
-            <?endif;?>
+            <? if ($isAdmin) : ?>
+<!--TODO Сделать проверку на Админа при добавлении отзыва(добавляются кнопки). -->
+                <a href="/" class="edit" data-id_feed="<?= $value['id'] ?>">[править]</a>
+                <a href="/" class="del" data-id_feed="<?= $value['id'] ?>">[X]</a>
+            <? endif; ?>
         </div>
     <? endforeach; ?>
 </div>
@@ -73,9 +74,6 @@
         })
 
     });
-
-
-
 
 
 </script>
