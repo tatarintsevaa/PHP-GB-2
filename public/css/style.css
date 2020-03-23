@@ -266,15 +266,16 @@ main {
       display: flex;
       flex-direction: column;
       align-items: center; }
-      .order_details__checkout input {
-        border-radius: 10px 10px 10px 10px;
-        border: 1px solid #3C3F41;
-        font-size: 1rem;
-        padding: 0.2rem 0.5rem;
-        margin-bottom: 0.5rem;
-        outline: none; }
 
-.checkoutBtn {
+.input {
+  border-radius: 10px 10px 10px 10px;
+  border: 1px solid #3C3F41;
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.5rem;
+  outline: none; }
+
+.checkoutBtn, .btn {
   font-size: 18px;
   width: max-content;
   height: 35px;
@@ -287,7 +288,7 @@ main {
   line-height: 18px;
   transition: all 0.2s;
   color: #fff; }
-  .checkoutBtn:hover {
+  .checkoutBtn:hover, .btn:hover {
     cursor: pointer;
     background-color: #eeeeee;
     color: black; }
@@ -308,5 +309,27 @@ main {
   .auth span {
     color: #eeeeee;
     margin-right: 10px; }
+
+.auth-block {
+  display: flex;
+  flex-direction: column; }
+  .auth-block input {
+    margin-bottom: 10px; }
+  .auth-block_btn {
+    display: flex;
+    justify-content: space-between; }
+
+.admin-orders {
+  width: 80%;
+  text-align: center; }
+  .admin-orders tr td {
+    padding: 0.2rem; }
+
+.addProduct {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px; }
+  .addProduct input {
+    margin-bottom: 5px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -4,10 +4,8 @@
 namespace app\controllers;
 
 use app\engine\App;
-use app\engine\Request;
 use app\models\entities\Cart;
 use app\models\entities\Orders;
-use app\models\repositories\CartRepository;
 
 
 class CartController extends Controller

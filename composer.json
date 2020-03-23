@@ -1,7 +1,9 @@
 {
   "require": {
     "ext-json": "*",
-    "phpunit/phpunit": "^9.0"
+    "phpunit/phpunit": "^9.0",
+    "robmorgan/phinx": "^0.11.4",
+    "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {

@@ -19,6 +19,7 @@ use app\traits\TSingletone;
  * @property ProductRepository $productRepository
  * @property FeedbackRepository $feedbackRepository
  * @property OrdersRepository $ordersRepository
+ * @property SimpleImage $simpleImage
  * @property Db $db
  */
 class App

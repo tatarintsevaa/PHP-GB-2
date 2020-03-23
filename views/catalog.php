@@ -3,7 +3,11 @@
     <?php foreach ($catalog as $item): ?>
         <div class="product-item">
             <a href="/product/card/?id=<?= $item['id'] ?>" target="_blank" title="Подробнее о товаре">
-                <img src="http://via.placeholder.com/150x120" alt="<?= $item['name'] ?>">
+                <? if (is_null($item['image'])): ?>
+                    <img src="http://via.placeholder.com/150x120" alt="<?= $item['name'] ?>">
+                <? else: ?>
+                    <img src="/img/middle/<?=$item['image']?>" alt="<?= $item['name'] ?>">
+                <? endif; ?>
             </a>
             <div class="product-item__text">
                 <h3><?= $item['name'] ?></h3>
@@ -26,7 +30,7 @@
         <? endif; ?>
     <? endfor; ?>
     <? if ($next <= $pageCount): ?>
-    <a class="pagination_item" href="/product/catalog/?page=<?= $next ?>">></a>
+        <a class="pagination_item" href="/product/catalog/?page=<?= $next ?>">></a>
     <? endif; ?>
 </div>
 <script>

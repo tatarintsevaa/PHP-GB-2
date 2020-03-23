@@ -29,8 +29,8 @@
                 <p><span id="total"><?= $total ?></span> руб.</p>
             </div>
             <div class="order_details__checkout">
-                <input type="text" name="name" placeholder="ФИО" id="name">
-                <input type="text" name="phone" placeholder="Номер телефона" id="phone">
+                <input class="input" type="text" name="name" placeholder="ФИО" id="name">
+                <input class="input" type="text" name="phone" placeholder="Номер телефона" id="phone">
                 <button class="checkoutBtn ">Оформить заказ</button>
             </div>
         </div>

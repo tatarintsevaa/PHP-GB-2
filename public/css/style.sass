@@ -300,17 +300,18 @@ main
       display: flex
       flex-direction: column
       align-items: center
-      & input
-        border-radius: 10px 10px 10px 10px
-        border: 1px solid $dark
-        font-size: 1rem
-        padding: 0.2rem 0.5rem
-        margin-bottom: 0.5rem
-        outline: none
 
 
-.checkoutBtn
-  .by-btn
+.input
+    border-radius: 10px 10px 10px 10px
+    border: 1px solid $dark
+    font-size: 1rem
+    padding: 0.2rem 0.5rem
+    margin-bottom: 0.5rem
+    outline: none
+
+
+.checkoutBtn,.btn
   font-size: 18px
   width: max-content
   height: 35px
@@ -352,3 +353,25 @@ main
     margin-right: 10px
 
 
+.auth-block
+  display: flex
+  flex-direction: column
+  & input
+    margin-bottom: 10px
+  &_btn
+    display: flex
+    justify-content: space-between
+
+.admin-orders
+  width: 80%
+  text-align: center
+  & tr
+    & td
+      padding: 0.2rem
+
+.addProduct
+  display: flex
+  flex-direction: column
+  margin-top: 10px
+  & input
+    margin-bottom: 5px

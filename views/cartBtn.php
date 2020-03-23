@@ -6,8 +6,8 @@
             <span><?=$username?></span><a href="/auth/logout/">Выход</a>
         </div>
         <? else: ?>
-        <a href="/auth/">Вход</a>
-        <a href="#">Регистрация</a>
+        <a href="/auth/signIn/">Вход</a>
+        <a href="/auth/signUp/">Регистрация</a>
         <?endif;?>
     </div>
 </div>

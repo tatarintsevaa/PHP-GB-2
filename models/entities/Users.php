@@ -20,10 +20,12 @@ class Users extends Model
     ];
 
 
-    public function __construct($login = null, $pass = null)
+    public function __construct($login = null, $pass = null, $hash = '', $role = 2)
     {
         $this->login = $login;
         $this->pass = $pass;
+        $this->hash = $hash;
+        $this->role = $role;
     }
 
 

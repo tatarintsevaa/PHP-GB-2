@@ -25,7 +25,6 @@ class ProductController extends Controller
             $page--;
         }
         $pageCount = App::call()->productRepository->getPagesCount();
-
         $qtyDisplayedItems = App::call()->config['qty_displayed_items'];
 
         $catalog = App::call()->productRepository->showLimit((($page - 1) * $qtyDisplayedItems), $qtyDisplayedItems);

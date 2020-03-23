@@ -44,7 +44,8 @@ abstract class Controller
                         'username' => App::call()->usersRepository->getName(),
                     ])
                 ]),
-                'menu' => $this->renderTemplate('menu'),
+                'menu' => $this->renderTemplate('menu',
+                    ['isAdmin' => App::call()->usersRepository->isAdmin()]),
                 'content' => $this->renderTemplate($templates, $params)
             ]);
         } else {
