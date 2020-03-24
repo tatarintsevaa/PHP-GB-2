@@ -10,6 +10,7 @@ use app\models\repositories\UsersRepository;
 use app\models\repositories\FeedbackRepository;
 use app\models\repositories\OrdersRepository;
 use app\traits\TSingletone;
+use app\controllers\ProductController;
 
 /**
  * Class App

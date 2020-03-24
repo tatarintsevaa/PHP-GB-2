@@ -2,7 +2,8 @@
 session_start();
 
 use app\engine\App;
-use app\engine\Autoload;
+use app\controllers\ProductController;
+use app\engine\Render;
 
 //include realpath("../engine/Autoload.php");
 

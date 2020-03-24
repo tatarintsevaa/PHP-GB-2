@@ -16,7 +16,7 @@ class ApiController extends Controller
         $feedback = new Feedback($data['name'], $data['feed'], $data['id_good']);
         App::call()->feedbackRepository->save($feedback);
         header('Content-Type: application/json');
-        echo json_encode(['id' => $feedback->id]);
+        echo json_encode(['id' => $feedback->id, 'isAdmin' => App::call()->usersRepository->isAdmin()]);
     }
 
     public function actionEdit() {

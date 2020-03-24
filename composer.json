@@ -3,7 +3,8 @@
     "ext-json": "*",
     "phpunit/phpunit": "^9.0",
     "robmorgan/phinx": "^0.11.4",
-    "ext-gd": "*"
+    "ext-gd": "*",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {

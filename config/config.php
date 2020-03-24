@@ -36,7 +36,7 @@ return [
             'host' => 'localhost',
             'login' => 'root',
             'password' => '',
-            'database' => 'shop',
+            'database' => 'shop2',
             'charset' => 'utf8'
         ],
         'request' => [

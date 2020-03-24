@@ -35,13 +35,14 @@ class CreateShopTables extends AbstractMigration
             ->addColumn('name', 'text')
             ->addColumn('description', 'text')
             ->addColumn('price', 'float')
-            ->addColumn('image', 'text')
+            ->addColumn('image', 'text', ['null' => true])
             ->create();
 
         $this->table('cart')
             ->addColumn('id_good', 'integer')
             ->addColumn('session_id', 'text')
             ->addColumn('qty', 'integer')
+            ->addColumn('user', 'text', ['null' => true])
             ->create();
 
         $this->table('feedback')
@@ -56,12 +57,13 @@ class CreateShopTables extends AbstractMigration
             ->addColumn('phone', 'integer')
             ->addColumn('price', 'integer')
             ->addColumn('status', 'integer')
+            ->addColumn('user', 'text', ['null' => true])
             ->create();
 
         $this->table('users')
             ->addColumn('login', 'text')
             ->addColumn('pass', 'text')
-            ->addColumn('hash', 'text')
+            ->addColumn('hash', 'text', ['null' => true])
             ->addColumn('role', 'integer')
             ->create();
     }

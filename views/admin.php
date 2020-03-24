@@ -2,6 +2,7 @@
 <table class="admin-orders">
     <tr>
         <td>ID</td>
+        <td>Логин</td>
         <td>Имя клиента</td>
         <td>Телефон</td>
         <td>текущий статус</td>

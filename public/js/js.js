@@ -103,16 +103,21 @@ function addEvent(elem) {
             .then((response) => response.json())
             .then((data) => {
                 const feedElem = document.createElement('div');
-                feedElem.innerHTML = `<span><strong>${name.value}</strong>: ${feed.value}</span>
+                if (data.isAdmin) {
+                    feedElem.innerHTML = `<span><strong>${name.value}</strong>: ${feed.value}</span>
                                           <a href="/" class="edit" data-id_feed="${data.id}" >[править]</a>
                                           <a href="/" class="del" data-id_feed="${data.id}">[X]</a>`;
+                    const editElem = document.querySelector('.edit');
+                    editEvent(editElem);
+                    const delElem = document.querySelector('.del');
+                    delEvent(delElem);
+                } else {
+                    feedElem.innerHTML = `<span><strong>${name.value}</strong>: ${feed.value}</span>`;
+                }
                 document.querySelector('.feedback_list').insertAdjacentElement('afterbegin', feedElem);
                 name.value = '';
                 feed.value = '';
-                const editElem = document.querySelector('.edit');
-                editEvent(editElem);
-                const delElem = document.querySelector('.del');
-                delEvent(delElem);
+
 
             })
             .catch((err) => {
