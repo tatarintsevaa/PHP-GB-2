@@ -1,0 +1,377 @@
+*
+  margin: 0
+  padding: 0
+
+$dark: #3C3F41
+$light: #eeeeee
+
+header
+  padding: 5px 20px
+  height: 100px
+  display: flex
+  justify-content: space-between
+  align-items: center
+  background-color: $dark
+  box-sizing: border-box
+
+.logo
+  text-decoration: none
+  font-size: 2em
+  color: $light
+
+.cart-drop
+  position: absolute
+  margin-top: 10px
+  background-color: #ffffff
+  border: 1px solid $light
+  right: 50px
+  padding: 5px
+
+.cart-item
+  display: flex
+  justify-content: space-between
+  width: 280px
+  padding: 5px
+  align-items: center
+
+  &__text
+    width: 100px
+
+  &__quantity
+    width: 10px
+
+  &__price
+    width: 60px
+
+.cart-empty
+  padding: 10px
+  font-size: 20px
+
+.btn-rem
+  color: #ffffff
+  background-color: $dark
+  font-weight: 400
+  width: 20px
+  height: 20px
+  border: none
+  line-height: 20px
+  transition: all 0.2s
+  outline: none
+
+  &:hover
+    color: $dark
+    background-color: #ffffff
+    border: 1px solid $dark
+
+.invisible
+  display: none
+
+
+.btn-cart
+  display: block
+  text-decoration: none
+  color: $dark
+  text-transform: uppercase
+  font-size: 20px
+  height: 40px
+  padding-right: 10px
+  padding-left: 10px
+  text-align: center
+  border-radius: 10px 10px 10px 10px
+  border: 1px solid #fff
+  background-color: #fff
+  line-height: 40px
+  transition: all 0.2s
+
+  &:hover
+    cursor: pointer
+    background-color: $dark
+    color: #ffffff
+
+.cart
+  position: relative
+
+  &_qty
+    width: 20px
+    height: 20px
+    font-size: 15px
+    border-radius: 50%
+    background-color: #ffffff
+    color: $dark
+    text-align: center
+    line-height: 20px
+    position: absolute
+    top: 32px
+    right: -12px
+
+
+.products
+  width: 80%
+  display: flex
+  justify-content: space-around
+  flex-wrap: wrap
+  margin-bottom: 10px
+
+main
+  display: flex
+  align-items: center
+  flex-direction: column
+
+.section-name
+  color: $dark
+  margin-bottom: 20px
+
+.product-item
+  min-height: 250px
+  width: 150px
+  background-color: $light
+  box-sizing: border-box
+  border-radius: 10px 10px 10px 10px
+  transition: all 0.2s ease
+
+  &:hover
+    transform: scale(1.02)
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
+
+
+  &__text
+    height: 100px
+    padding: 10px
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+
+    & h3, p
+      font-size: 18px
+      color: $dark
+
+  & img
+    border-radius: 10px 10px 0 0
+
+.by-btn
+  font-size: 18px
+  width: max-content
+  height: 35px
+  padding-right: 5px
+  padding-left: 5px
+  border: 1px solid $dark
+  border-radius: 10px 10px 10px 10px
+  //box-shadow: 0 0 10px rgba(0,0,0,0.5)
+  background-color: $dark
+  outline: none
+  line-height: 18px
+  transition: all 0.2s
+  color: #fff
+
+  &:hover
+    cursor: pointer
+    background-color: $light
+    color: black
+//&:active
+//  box-shadow: none
+.menu
+  margin: 0 auto
+  display: flex
+  width: 80%
+  justify-content: center
+  list-style-type: none
+  border-bottom: 1px solid $dark
+  padding: 20px 0
+
+  & li
+    margin-right: 20px
+    font-size: 1em
+    text-transform: uppercase
+
+  & a
+    text-decoration: none
+    color: $dark
+
+    &:hover
+      border-bottom: 2px solid $dark
+
+.query
+  border: none
+
+  &:focus
+    outline: none
+  font-size: 18px
+  padding-right: 5px
+  padding-left: 5px
+  height: 35px
+  line-height: 35px
+  border-radius: 10px 0 0 10px
+
+.search-btn
+  margin-right: 30px
+  height: 35px
+  width: 35px
+  margin-left: 0
+  border: none
+  border-radius: 0 10px 10px 0
+  color: $dark
+  transition: all 0.2s
+  background-color: #ffffff
+  outline: none
+
+  & i
+    font-size: 20px
+
+  &:hover
+    background-color: $dark
+    color: #ffffff
+    border: 1px solid #ffffff
+
+.search
+  display: flex
+
+#feedback
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  input
+    width: 200px
+    margin-bottom: 5px
+
+  button
+    width: 200px
+
+.card
+  text-align: center
+  padding: 20px 0
+
+  &_box
+    display: flex
+    padding: 20px 0
+
+    & img
+      margin-right: 20px
+
+    &__text
+      display: flex
+      flex-direction: column
+      justify-content: space-around
+      align-items: center
+
+.pagination
+  & a:hover
+    background-color: $dark
+    color: $light
+
+  &_item
+    padding: 5px
+    color: $dark
+    border-radius: 30%
+    transition: all 0.2s ease
+    text-decoration: none
+
+#active
+  background-color: lightgray
+  color: $dark
+
+.order
+  width: 80%
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  &_cart
+    td
+      padding: 0 10px
+      text-align: center
+
+  &_details
+    width: 40%
+    display: flex
+    flex-direction: column
+    align-items: center
+    &__total
+      min-width: 25%
+      text-align: center
+      background-color: $light
+      padding: 5px 15px
+      margin-bottom: 0.5rem
+      & p:first-of-type
+        font-size: 0.8rem
+      & p:last-of-type
+        font-size: 1rem
+    &__checkout
+      width: 50%
+      display: flex
+      flex-direction: column
+      align-items: center
+
+
+.input
+    border-radius: 10px 10px 10px 10px
+    border: 1px solid $dark
+    font-size: 1rem
+    padding: 0.2rem 0.5rem
+    margin-bottom: 0.5rem
+    outline: none
+
+
+.checkoutBtn,.btn
+  font-size: 18px
+  width: max-content
+  height: 35px
+  padding-right: 5px
+  padding-left: 5px
+  border: 1px solid $dark
+  border-radius: 10px 10px 10px 10px
+  //box-shadow: 0 0 10px rgba(0,0,0,0.5)
+  background-color: $dark
+  outline: none
+  line-height: 18px
+  transition: all 0.2s
+  color: #fff
+
+  &:hover
+    cursor: pointer
+    background-color: $light
+    color: black
+
+
+#total
+  font-size: 2rem
+
+
+
+
+.auth
+  margin-top: 10px
+  text-align: center
+  &:first-child
+    margin-right: 5px
+  & a
+    text-decoration: none
+    color: #ffffff
+    &:hover
+      border-bottom: 1px solid #ffffff
+  & span
+    color: $light
+    margin-right: 10px
+
+
+.auth-block
+  display: flex
+  flex-direction: column
+  & input
+    margin-bottom: 10px
+  &_btn
+    display: flex
+    justify-content: space-between
+
+.admin-orders
+  width: 80%
+  text-align: center
+  & tr
+    & td
+      padding: 0.2rem
+
+.addProduct
+  display: flex
+  flex-direction: column
+  margin-top: 10px
+  & input
+    margin-bottom: 5px

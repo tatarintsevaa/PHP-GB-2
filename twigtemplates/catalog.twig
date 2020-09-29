@@ -1,0 +1,42 @@
+<h1 class="section-name">Каталог</h1>
+<div class="products">
+    {% for item in catalog %}
+        <div class="product-item">
+            <a href="/product/card/?id={{ item.id }}" target="_blank" title="Подробнее о товаре">
+                <img src="http://via.placeholder.com/150x120" alt="{{ item.name }}">
+            </a>
+            <div class="product-item__text">
+                <h3>{{ item.name }}</h3>
+                <p>Цена: <strong>{{ item.price }}</strong> руб.</p>
+                <button class="by-btn">Купить</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="pagination" class="pagination">
+    {% if (prev >= 1) %}
+        <a class="pagination_item" href="/product/catalog/?page={{ prev }}"><</a>
+    {% endif %}
+    {% for i in range( low=1, high=pageCount, step=1 ) %}
+        {% if (page == i) %}
+            <span class="pagination_item" id="active">{{ i }}</span>
+        {% else %}
+            <a class="pagination_item" href="/product/catalog/?page={{ i }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if (next <= pageCount) %}
+        <a class="pagination_item" href="/product/catalog/?page={{ next }}">></a>
+    {% endif %}
+</div>
+{#<div class="pagination">#}
+{#    <a href="/product/catalog/?page={{ page }}&action=prev"><</a>#}
+{#    {% for i in range(low=1, high=pageCount, step=1) and j in range(low=1, high=pageCount, step=1) %}#}
+{#        {% if loop.first %}#}
+{#            <a href="/product/catalog/?page=0">{{ i }}</a>#}
+{#        {% else %}#}
+{#            <a href="/product/catalog/?page={{ j + constant('PAGINATION_ITEM_COUNT') }}">{{ i }}</a>#}
+{#        {% endif %}#}
+{#    {% endfor %}#}
+{#    <a href="/product/catalog/?page={{ page }}&action=next">></a>#}
+{#</div>#}
+
